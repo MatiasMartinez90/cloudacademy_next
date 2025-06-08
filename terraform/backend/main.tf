@@ -64,8 +64,8 @@ resource "aws_cognito_user_pool" "user_pool" {
     }
   }
 
-  # Equivalent to signInAliases: { email: true } in CDK
-  alias_attributes = ["email"]
+  # Usar email como username
+  username_attributes = ["email"]
 
   # Auto-verify email addresses
   auto_verified_attributes = ["email"]
@@ -101,11 +101,6 @@ resource "aws_cognito_user_pool" "user_pool" {
       min_length = 7   # Minimum for email format
       max_length = 256
     }
-  }
-
-  # Username configuration to allow email as username
-  username_configuration {
-    case_sensitive = false
   }
 }
 
