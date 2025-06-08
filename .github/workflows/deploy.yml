@@ -3,7 +3,7 @@ name: Build and Deploy to S3
 on:
   push:
     branches:
-      - main
+      - ft/auth2
 
 jobs:
   build-and-deploy:
@@ -33,4 +33,4 @@ jobs:
           aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
 
       - name: Deploy to S3
-        run: aws s3 sync ./out s3://proyecto.cloudacademy.ar/ --delete 
+        run: aws s3 sync ./out s3://website-bucket-5d2io74t/ --delete 
