@@ -26,6 +26,13 @@ jobs:
           cd app
           npm run build
           
+      - name: Crear env.json
+        run: |
+          echo '{
+            "cognitoUserPoolId": "us-east-1_S1fzr7edb",
+            "cognitoUserPoolWebClientId": "5cn02jt88cf1q29d0sue55cuou"
+          }' > ./app/out/env.json
+          
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
