@@ -3,6 +3,12 @@ on:
   push:
     branches:
       - ft/auth2
+    paths:
+      - 'app/**'
+      - 'lambda/**'
+      - 'cloudfrontfunction/**'
+      - '.github/workflows/deploy.yml'
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
