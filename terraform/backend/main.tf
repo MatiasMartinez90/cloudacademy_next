@@ -23,7 +23,7 @@ resource "aws_lambda_function" "post_confirmation" {
   filename         = "../../lambda/postConfirmation.zip"
   function_name    = "PostConfirmationFn"
   role            = aws_iam_role.lambda_role.arn
-  handler         = "index.handler"
+  handler         = "postConfirmation.handler"
   runtime         = "nodejs18.x"
   source_code_hash = filebase64sha256("../../lambda/postConfirmation.zip")
 }
