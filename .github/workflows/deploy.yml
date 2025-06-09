@@ -35,8 +35,8 @@ jobs:
       - name: Crear env.json
         run: |
           echo '{
-            "cognitoUserPoolId": "us-east-1_S1fzr7edb",
-            "cognitoUserPoolWebClientId": "5cn02jt88cf1q29d0sue55cuou"
+            "cognitoUserPoolId": "us-east-1_kbBZ0w9sf",
+            "cognitoUserPoolWebClientId": "7ho22jco9j63c3hmsrsp4bj0ti"
           }' > ./app/out/env.json
           
       - name: Configure AWS credentials
