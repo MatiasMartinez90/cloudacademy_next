@@ -7,6 +7,10 @@ const Home: NextPage = () => {
     Router.push('/admin')
   }
 
+  const moveToExamplePage = () => {
+    Router.push('/example')
+  }
+
   return (
     <main className={styles.main}>
       <h1 className={styles.title}>
@@ -15,6 +19,10 @@ const Home: NextPage = () => {
 
       <p className={styles.description}>
         Move to the administrator screen: <button onClick={moveToRequireAuthenticationPage}>admin</button>
+      </p>
+
+      <p className={styles.description}>
+        Check out our example page: <button onClick={moveToExamplePage}>example</button>
       </p>
     </main>
   )
