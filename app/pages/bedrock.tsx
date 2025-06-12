@@ -5,7 +5,7 @@ import { useState } from 'react'
 const BedrockCourse: NextPage = () => {
   const [showDemo, setShowDemo] = useState(false)
   const [currentTaskStep, setCurrentTaskStep] = useState(0)
-  const [taskAnswers, setTaskAnswers] = useState({
+  const [taskAnswers, setTaskAnswers] = useState<Record<string, string>>({
     step0: '',
     step1: '',
     step2: '',
@@ -67,7 +67,7 @@ const BedrockCourse: NextPage = () => {
     {
       id: 0,
       title: "What is RAG and how will you demonstrate it today?",
-      placeholder: "Start your answer with 'RAG (Retrieval Augmented Generation) is...' In this project, I will demonstrate RAG by...",
+      placeholder: "Start your answer with &apos;RAG (Retrieval Augmented Generation) is...&apos; In this project, I will demonstrate RAG by...",
       description: "Go on, we know you have a great answer...",
       charLimit: 500
     },
@@ -75,14 +75,14 @@ const BedrockCourse: NextPage = () => {
       id: 1,
       title: "What are we doing in this step?",
       placeholder: "In this step, I will...",
-      description: "Start your answer with 'In this step, I will...'",
+      description: "Start your answer with &apos;In this step, I will...&apos;",
       charLimit: 500
     },
     {
       id: 2,
       title: "What are we doing in this step?",
       placeholder: "In this step, I will...", 
-      description: "Start your answer with 'In this step, I will...'",
+      description: "Start your answer with &apos;In this step, I will...&apos;",
       charLimit: 500
     },
     {
@@ -237,7 +237,7 @@ const BedrockCourse: NextPage = () => {
                     <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.78 0-2.678-2.153-1.415-3.414l5-5A2 2 0 009 9.172V5L8 4z" />
                     </svg>
-                    <h3 className="text-white font-medium">WHAT YOU'LL NEED</h3>
+                    <h3 className="text-white font-medium">WHAT YOU&apos;LL NEED</h3>
                   </div>
                   <ul className="space-y-2 text-gray-300">
                     <li className="flex items-center space-x-2">
@@ -284,12 +284,12 @@ const BedrockCourse: NextPage = () => {
               </div>
               <div className="space-y-4 text-gray-300">
                 <p>
-                  In this project, you'll learn how to build a chatbot that's an expert on you – it can answer questions about 
+                  In this project, you&apos;ll learn how to build a chatbot that&apos;s an expert on you – it can answer questions about 
                   who you are, what you do, and what you know!
                 </p>
                 <p>
                   This is made possible when we use a special AI technique called <span className="text-white font-medium">RAG (Retrieval Augmented 
-                  Generation)</span>, which is a way to train an AI chatbot on your personal documents. We'll learn how to do this 
+                  Generation)</span>, which is a way to train an AI chatbot on your personal documents. We&apos;ll learn how to do this 
                   on <span className="text-white font-medium">Amazon Bedrock</span>, an AWS service that gives you access to AI models to bring into your applications.
                 </p>
               </div>
@@ -349,12 +349,12 @@ const BedrockCourse: NextPage = () => {
             <div className="space-y-4 text-gray-300">
               <p>
                 AI chatbots like ChatGPT are super smart, but they only know what they learned during training and what 
-                they can search online. They can't learn about you or your documents, unless you upload 
-                your files manually in each conversation (or unless you're a celebrity 😅).
+                they can search online. They can&apos;t learn about you or your documents, unless you upload 
+                your files manually in each conversation (or unless you&apos;re a celebrity 😅).
               </p>
               <p>
-                That's where <span className="text-white font-medium">RAG (Retrieval Augmented Generation)</span> comes in. RAG is an AI technique that lets you take 
-                an AI model's brain (i.e. their ability to turn data into a human-like response) and give it your own 
+                That&apos;s where <span className="text-white font-medium">RAG (Retrieval Augmented Generation)</span> comes in. RAG is an AI technique that lets you take 
+                an AI model&apos;s brain (i.e. their ability to turn data into a human-like response) and give it your own 
                 documents to train on. Now, your AI chatbot becomes an in-house expert on your documents and 
                 information!
               </p>
@@ -369,7 +369,7 @@ const BedrockCourse: NextPage = () => {
           <div className="bg-slate-800/40 rounded-2xl border border-slate-700/50 p-6 backdrop-blur-sm">
             <div className="flex items-center space-x-2 mb-4">
               <span className="text-2xl">✅</span>
-              <h3 className="text-white font-semibold">Let's get ready to...</h3>
+              <h3 className="text-white font-semibold">Let&apos;s get ready to...</h3>
             </div>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
@@ -384,19 +384,19 @@ const BedrockCourse: NextPage = () => {
                 <div className="w-5 h-5 bg-gray-600 rounded flex items-center justify-center">
                   <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                 </div>
-                <span className="text-gray-400">📚 Create a Knowledge Base to hold your chatbot's information.</span>
+                <span className="text-gray-400">📚 Create a Knowledge Base to hold your chatbot&apos;s information.</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 bg-gray-600 rounded flex items-center justify-center">
                   <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                 </div>
-                <span className="text-gray-400">🗄️ Use Amazon S3 and OpenSearch to manage your chatbot's data.</span>
+                <span className="text-gray-400">🗄️ Use Amazon S3 and OpenSearch to manage your chatbot&apos;s data.</span>
               </div>
               <div className="flex items-center space-x-3">
                 <div className="w-5 h-5 bg-gray-600 rounded flex items-center justify-center">
                   <div className="w-2 h-2 bg-gray-400 rounded-full"></div>
                 </div>
-                <span className="text-gray-400">🔍 Test and refine your chatbot's performance.</span>
+                <span className="text-gray-400">🔍 Test and refine your chatbot&apos;s performance.</span>
               </div>
             </div>
 
@@ -467,15 +467,15 @@ const BedrockCourse: NextPage = () => {
               <div className="space-y-6">
                 <div className="border border-orange-500/30 bg-orange-500/10 rounded-lg p-4">
                   <p className="text-orange-200 mb-2">
-                    Welcome to the high-touch version of this project. We'll guide you through this project step-by-step 
+                    Welcome to the high-touch version of this project. We&apos;ll guide you through this project step-by-step 
                     together.
                   </p>
-                  <p className="text-orange-200">Let's go!</p>
+                  <p className="text-orange-200">Let&apos;s go!</p>
                 </div>
 
                 <div className="border border-slate-600/50 bg-slate-700/30 rounded-lg p-4">
                   <p className="text-gray-300 mb-2">
-                    If you're EVER stuck - <a href="#" className="text-blue-400 hover:text-blue-300 underline">ask the NetWork community.</a> Students like you are already asking 
+                    If you&apos;re EVER stuck - <a href="#" className="text-blue-400 hover:text-blue-300 underline">ask the NetWork community.</a> Students like you are already asking 
                     questions about this project.
                   </p>
                 </div>
@@ -488,10 +488,10 @@ const BedrockCourse: NextPage = () => {
                   
                   <h3 className="text-xl font-bold text-white mb-4">Before we start Step #1...</h3>
                   
-                  <p className="text-gray-300 mb-4">Here's a quick overview of what we're building today:</p>
+                  <p className="text-gray-300 mb-4">Here&apos;s a quick overview of what we&apos;re building today:</p>
                   
                   <p className="text-gray-300 mb-4">
-                    You're about to build a chatbot that's trained on your personal documents. When you send a message to 
+                    You&apos;re about to build a chatbot that&apos;s trained on your personal documents. When you send a message to 
                     your completed chatbot, three things will happen behind the scenes:
                   </p>
                   
@@ -547,7 +547,7 @@ const BedrockCourse: NextPage = () => {
                     </div>
                   </div>
                   
-                  <p className="text-gray-400 text-center text-sm mb-6">A simple diagram of what we're building</p>
+                  <p className="text-gray-400 text-center text-sm mb-6">A simple diagram of what we&apos;re building</p>
 
                   <div className="border border-yellow-500/30 bg-yellow-500/10 rounded-lg p-4 mb-6">
                     <div className="flex items-center space-x-2 mb-2">
@@ -555,10 +555,10 @@ const BedrockCourse: NextPage = () => {
                       <h5 className="text-yellow-200 font-medium">How in the world are we going to build this?</h5>
                     </div>
                     <ul className="space-y-2 text-yellow-200">
-                      <li>• We'll build a <span className="font-medium">Knowledge Base</span> in Amazon Bedrock in 🧠 <span className="font-medium">Steps #1-3</span>.</li>
-                      <li>• We'll pick the best <span className="font-medium">AI models</span> for our chatbot in 🤖 <span className="font-medium">Step #4</span>.</li>
-                      <li>• We'll sync your documents from S3 to the Knowledge Base in 🔄 <span className="font-medium">Step #5</span>.</li>
-                      <li>• Finally, Bedrock sets up a chatbot when we connect the Knowledge Base and AI model, which we'll test in 🤖 <span className="font-medium">Step #6!</span></li>
+                      <li>• We&apos;ll build a <span className="font-medium">Knowledge Base</span> in Amazon Bedrock in 🧠 <span className="font-medium">Steps #1-3</span>.</li>
+                      <li>• We&apos;ll pick the best <span className="font-medium">AI models</span> for our chatbot in 🤖 <span className="font-medium">Step #4</span>.</li>
+                      <li>• We&apos;ll sync your documents from S3 to the Knowledge Base in 🔄 <span className="font-medium">Step #5</span>.</li>
+                      <li>• Finally, Bedrock sets up a chatbot when we connect the Knowledge Base and AI model, which we&apos;ll test in 🤖 <span className="font-medium">Step #6!</span></li>
                     </ul>
                   </div>
 
@@ -625,7 +625,7 @@ const BedrockCourse: NextPage = () => {
                   
                   <div className="flex justify-between items-center mt-4">
                     <div className="text-sm text-gray-400">
-                      {taskAnswers.step0.length}/{currentTask.charLimit} Character limit reached {currentTask.charLimit > taskAnswers.step0.length ? 'Upgrade to Pro' : ''}
+                      {taskAnswers.step0.length}/{currentTask.charLimit} Character limit reached {currentTask.charLimit > taskAnswers.step0.length ? "Upgrade to Pro" : ""}
                     </div>
                     <div className="flex space-x-3">
                       <button className="px-4 py-2 bg-slate-600 text-gray-300 rounded-lg hover:bg-slate-500 transition-colors">
@@ -674,7 +674,7 @@ const BedrockCourse: NextPage = () => {
                   </h3>
                   
                   <p className="text-gray-300 mb-4">
-                    {currentTaskStep === 1 && "In this step, you'll create a Knowledge Base in Amazon Bedrock to store your chatbot's information."}
+                    {currentTaskStep === 1 && "In this step, you&apos;ll create a Knowledge Base in Amazon Bedrock to store your chatbot&apos;s information."}
                     {currentTaskStep === 2 && "Upload your documents to Amazon S3 so your chatbot can access them."}
                     {currentTaskStep === 3 && "Connect your S3 bucket to your Knowledge Base and complete the setup."}
                   </p>
@@ -710,7 +710,7 @@ const BedrockCourse: NextPage = () => {
                       <h4 className="text-white font-medium">What are we doing in this step?</h4>
                     </div>
                     
-                    <p className="text-gray-300 mb-4">Start your answer with "In this step, I will..."</p>
+                    <p className="text-gray-300 mb-4">Start your answer with &quot;In this step, I will...&quot;</p>
                     
                     <textarea
                       value={taskAnswers[`step${currentTaskStep}`] || ''}
