@@ -10,94 +10,115 @@ const Home: NextPage = () => {
     Router.push('/example')
   }
 
-  const courses = [
+  const moveToCategory = (categoryId: number) => {
+    // Redirigir a la página específica de cada categoría
+    switch(categoryId) {
+      case 9: // Bases de Datos
+        Router.push('/databases')
+        break
+      default:
+        // Para otras categorías, mostrar mensaje de "próximamente"
+        alert('Esta categoría estará disponible próximamente')
+    }
+  }
+
+  const categories = [
     {
       id: 1,
-      title: "Full Stack Developer con JavaScript",
-      description: "Conviértete en Full Stack Developer con JavaScript. Domina JavaScript, Node y React para tu primer gran empleo.",
-      icon: "⚡",
-      color: "bg-yellow-500",
-      instructor: "Por Juan Pérez",
-      category: "JavaScript"
+      title: "IA & Machine Learning",
+      description: "Inteligencia Artificial, RAG, ChatGPT, Machine Learning y proyectos prácticos con las últimas tecnologías.",
+      icon: "🧠",
+      color: "bg-purple-500",
+      courseCount: 12,
+      level: "Intermedio-Avanzado",
+      category: "IA & ML"
     },
     {
       id: 2,
-      title: "Curso de Configuración de Entorno de Desarrollo en Windows",
-      description: "Aprende a configurar tu entorno de desarrollo para trabajar de manera eficiente en Windows.",
-      icon: "🖥️",
-      color: "bg-blue-500",
-      instructor: "Por María García",
-      category: "Desarrollo"
+      title: "AWS & Cloud",
+      description: "Amazon Web Services, certificaciones, arquitectura cloud y servicios de nube para empresas modernas.",
+      icon: "☁️",
+      color: "bg-orange-500",
+      courseCount: 18,
+      level: "Todos los niveles",
+      category: "AWS"
     },
     {
       id: 3,
-      title: "Curso de Configuración de Entorno de Desarrollo en Linux",
-      description: "Domina Linux y configura tu entorno de desarrollo para ser más productivo.",
-      icon: "🐧",
-      color: "bg-orange-500",
-      instructor: "Por Carlos Ruiz",
-      category: "Linux"
+      title: "Ciberseguridad",
+      description: "Ethical hacking, pentesting, seguridad de aplicaciones y protección de infraestructuras empresariales.",
+      icon: "🔒",
+      color: "bg-red-500",
+      courseCount: 15,
+      level: "Intermedio-Avanzado",
+      category: "Ciberseguridad"
     },
     {
       id: 4,
-      title: "Curso de Configuración de Entorno de Desarrollo en macOS",
-      description: "Optimiza tu flujo de trabajo en macOS y configura las mejores herramientas de desarrollo.",
-      icon: "🍎",
-      color: "bg-gray-500",
-      instructor: "Por Ana López",
-      category: "macOS"
+      title: "Redes & Networking",
+      description: "Protocolos TCP/IP, configuración de routers, switches, VPN y administración de redes empresariales.",
+      icon: "🌐",
+      color: "bg-blue-500",
+      courseCount: 10,
+      level: "Básico-Intermedio",
+      category: "Networking"
     },
     {
       id: 5,
-      title: "Curso de Git y GitHub",
-      description: "Aprende control de versiones y colaboración en proyectos con Git y GitHub.",
-      icon: "📦",
-      color: "bg-green-500",
-      instructor: "Por Luis Martín",
-      category: "Git"
+      title: "Sistemas & Servidores",
+      description: "Administración de sistemas, Linux, Windows Server, virtualización y optimización de rendimiento.",
+      icon: "💻",
+      color: "bg-gray-500",
+      courseCount: 14,
+      level: "Intermedio",
+      category: "Sistemas"
     },
     {
       id: 6,
-      title: "Curso de Frontend Developer",
-      description: "Desarrolla interfaces modernas y atractivas con HTML, CSS y JavaScript.",
-      icon: "🎨",
-      color: "bg-purple-500",
-      instructor: "Por Elena Vega",
-      category: "Frontend"
+      title: "DevOps & CI/CD",
+      description: "Docker, Kubernetes, Jenkins, GitLab CI, automatización y metodologías de desarrollo ágil.",
+      icon: "🚀",
+      color: "bg-green-500",
+      courseCount: 22,
+      level: "Intermedio-Avanzado",
+      category: "DevOps"
     },
     {
       id: 7,
-      title: "Curso Práctico de Frontend Developer",
-      description: "Pon en práctica tus conocimientos de frontend con proyectos reales.",
-      icon: "💻",
-      color: "bg-indigo-500",
-      instructor: "Por Roberto Silva",
-      category: "Frontend"
+      title: "Challenges & Proyectos",
+      description: "Desafíos prácticos, proyectos reales y bootcamps intensivos para aplicar conocimientos técnicos.",
+      icon: "🎯",
+      color: "bg-yellow-500",
+      courseCount: 25,
+      level: "Todos los niveles",
+      category: "Proyectos"
     },
     {
       id: 8,
-      title: "Curso de Fundamentos de JavaScript",
-      description: "Domina los conceptos fundamentales de JavaScript desde cero.",
-      icon: "📜",
-      color: "bg-yellow-600",
-      instructor: "Por Patricia Ruiz",
-      category: "JavaScript"
+      title: "Automatización",
+      description: "Scripts, APIs, workflows automatizados y herramientas para optimizar procesos empresariales.",
+      icon: "⚙️",
+      color: "bg-indigo-500",
+      courseCount: 16,
+      level: "Intermedio",
+      category: "Automatización"
     },
     {
       id: 9,
-      title: "Curso de Asincronismo con JavaScript",
-      description: "Aprende a manejar operaciones asíncronas en JavaScript de manera eficiente.",
-      icon: "⚡",
-      color: "bg-red-500",
-      instructor: "Por Diego Morales",
-      category: "JavaScript"
+      title: "Bases de Datos",
+      description: "SQL, NoSQL, MongoDB, PostgreSQL, optimización de consultas y arquitectura de datos escalable.",
+      icon: "🗄️",
+      color: "bg-teal-500",
+      courseCount: 13,
+      level: "Básico-Avanzado",
+      category: "Bases de Datos"
     }
   ]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+    <div className="min-h-screen bg-slate-900">
       {/* Header estilo Platzi */}
-      <header className="bg-slate-800/90 backdrop-blur-sm border-b border-slate-700/50">
+      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-8">
@@ -149,96 +170,210 @@ const Home: NextPage = () => {
             <br />
             <span className="text-green-400">en tecnología</span>
           </h1>
-          <p className="text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
+          <p className="text-xl text-gray-300 mb-16 max-w-4xl mx-auto">
             Elige entre más de 1000 cursos online para aprender desde cero o desarrollar las 
             habilidades más demandadas del trabajo en tecnología.
           </p>
-
-          {/* Filtros estilo Platzi */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-            <select className="bg-slate-700/50 border border-slate-600 rounded-lg px-6 py-3 text-white focus:outline-none focus:border-green-400 transition-colors min-w-[200px]">
-              <option>Todas las categorías</option>
-              <option>Desarrollo Web</option>
-              <option>Inteligencia Artificial</option>
-              <option>DevOps</option>
-              <option>Diseño</option>
-            </select>
-            <select className="bg-slate-700/50 border border-slate-600 rounded-lg px-6 py-3 text-white focus:outline-none focus:border-green-400 transition-colors min-w-[200px]">
-              <option>Todas las escuelas</option>
-              <option>Escuela de JavaScript</option>
-              <option>Escuela de Python</option>
-              <option>Escuela de React</option>
-            </select>
-          </div>
         </div>
 
-        {/* Botones principales destacados */}
-        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
-          <button 
-            onClick={moveToExamplePage}
-            className="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25"
-          >
-            <span className="relative z-10">🚀 Ver Cursos Disponibles</span>
-            <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
-          </button>
-          <button 
-            onClick={moveToRequireAuthenticationPage}
-            className="px-8 py-4 border-2 border-green-400 text-green-400 rounded-xl font-semibold text-lg hover:bg-green-400 hover:text-slate-900 transition-all duration-300 transform hover:scale-105"
-          >
-            📊 Panel de Administración
-          </button>
-        </div>
-
-        {/* Sección de categoría */}
+        {/* Sección de categorías */}
         <div className="mb-8">
-          <div className="flex items-center justify-center mb-8">
-            <div className="flex items-center space-x-3">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="flex items-center space-x-3 mb-4">
               <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
               </svg>
-              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">DESARROLLO E INGENIERÍA</h2>
+              <h2 className="text-2xl font-bold text-white">Explora por Categorías</h2>
             </div>
+            <p className="text-gray-400 max-w-2xl">
+              Descubre cursos organizados por especialidad. Cada categoría contiene múltiples cursos diseñados para llevarte desde principiante hasta experto.
+            </p>
           </div>
 
-          {/* Curso destacado principal */}
-          <div className="mb-12 bg-gradient-to-r from-slate-800/60 to-slate-700/60 backdrop-blur-sm border border-slate-600/50 rounded-2xl p-8">
-            <div className="flex items-center space-x-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center text-2xl">
-                ⚡
-              </div>
-              <div>
-                <h3 className="text-2xl font-bold text-white mb-2">Full Stack Developer con JavaScript</h3>
-                <p className="text-gray-300 text-lg">
-                  Conviértete en Full Stack Developer con JavaScript. Domina JavaScript, Node y React para tu primer gran empleo. 
-                  Tu futuro en desarrollo web comienza aquí.
-                </p>
-              </div>
-            </div>
-          </div>
+          {/* Hero Course - RAG Bedrock */}
+          <div className="mb-16 relative">
+            {/* Glow effect background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-600/20 via-blue-600/20 to-green-600/20 rounded-3xl blur-xl"></div>
+            
+            <div className="relative bg-gradient-to-br from-slate-800/90 via-slate-800/95 to-slate-900/90 backdrop-blur-sm border-2 border-purple-500/30 rounded-3xl p-10 overflow-hidden">
+              {/* Background pattern */}
+              <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/10 to-blue-500/10 rounded-full blur-3xl"></div>
+              
+              <div className="relative z-10">
+                <div className="flex flex-col lg:flex-row items-start justify-between mb-8">
+                  <div className="flex-1 lg:pr-8">
+                    {/* Badge con animación */}
+                    <div className="flex items-center space-x-3 mb-6">
+                      <span className="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-lg animate-pulse">
+                        🔥 CURSO ESTRELLA
+                      </span>
+                      <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-500/20 text-green-300 border border-green-500/30">
+                        ✨ MÁS POPULAR
+                      </span>
+                    </div>
 
-          {/* Grid de cursos estilo Platzi */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {courses.map((course) => (
-              <div 
-                key={course.id} 
-                className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:bg-slate-700/50 hover:border-slate-600 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer"
-              >
-                <div className="flex items-center space-x-3 mb-4">
-                  <div className={`w-12 h-12 ${course.color} rounded-xl flex items-center justify-center text-xl`}>
-                    {course.icon}
+                    {/* Título impactante */}
+                    <h2 className="text-4xl lg:text-5xl font-black text-white mb-4 leading-tight">
+                      RAG <span className="bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 bg-clip-text text-transparent">Bedrock</span>
+                    </h2>
+                    
+                    {/* Subtítulo con gancho */}
+                    <p className="text-xl text-purple-200 font-semibold mb-4">
+                      🚀 Construye el Chatbot del Futuro con IA Avanzada
+                    </p>
+                    
+                    {/* Descripción persuasiva */}
+                    <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                      Domina RAG (Retrieval Augmented Generation) con Amazon Bedrock. Aprende a crear chatbots que entienden 
+                      <span className="text-purple-300 font-semibold"> TUS datos</span> y responden como expertos. 
+                      <span className="text-green-400 font-semibold">Proyecto práctico incluido.</span>
+                    </p>
+
+                    {/* Beneficios clave */}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-full flex items-center justify-center">
+                          ⚡
+                        </div>
+                        <span className="text-gray-300 font-medium">60 min proyecto práctico</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full flex items-center justify-center">
+                          🧠
+                        </div>
+                        <span className="text-gray-300 font-medium">IA + Amazon Bedrock</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-purple-500 to-purple-600 rounded-full flex items-center justify-center">
+                          💰
+                        </div>
+                        <span className="text-gray-300 font-medium">Costo: ~$0.01</span>
+                      </div>
+                      <div className="flex items-center space-x-3">
+                        <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full flex items-center justify-center">
+                          🎯
+                        </div>
+                        <span className="text-gray-300 font-medium">Nivel intermedio</span>
+                      </div>
+                    </div>
+
+                    {/* CTA principal */}
+                    <div className="flex flex-col sm:flex-row gap-4">
+                      <button 
+                        onClick={() => Router.push('/bedrock')}
+                        className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 via-blue-600 to-green-600 text-white font-bold text-lg rounded-2xl hover:shadow-2xl hover:shadow-purple-500/25 transition-all duration-300 transform hover:scale-105 overflow-hidden"
+                      >
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-400 via-blue-400 to-green-400 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <span className="relative z-10 flex items-center justify-center space-x-2">
+                          <span>🚀 Comenzar Proyecto Ahora</span>
+                        </span>
+                      </button>
+                      
+                      <button className="px-6 py-4 border-2 border-purple-400/50 text-purple-300 rounded-2xl font-semibold hover:bg-purple-500/20 hover:border-purple-400 transition-all duration-300">
+                        📋 Ver Demo Completo
+                      </button>
+                    </div>
                   </div>
-                  <div className="flex-1">
-                    <h4 className="text-white font-semibold text-sm leading-tight group-hover:text-green-400 transition-colors">
-                      {course.title}
-                    </h4>
+
+                  {/* Sidebar con social proof */}
+                  <div className="lg:w-80 mt-8 lg:mt-0">
+                    {/* Estudiantes activos */}
+                    <div className="bg-slate-700/50 rounded-2xl p-6 mb-6 border border-slate-600/30">
+                      <div className="flex items-center justify-between mb-4">
+                        <span className="text-gray-400 text-sm font-medium">ESTUDIANTES ACTIVOS</span>
+                        <div className="flex -space-x-2">
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-purple-500 border-2 border-slate-800"></div>
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 border-2 border-slate-800"></div>
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-green-500 border-2 border-slate-800"></div>
+                          <div className="w-8 h-8 rounded-full bg-gradient-to-r from-orange-400 to-orange-500 border-2 border-slate-800"></div>
+                          <div className="w-8 h-8 rounded-full bg-slate-600 border-2 border-slate-800 flex items-center justify-center">
+                            <span className="text-xs text-gray-300 font-bold">+50</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="text-2xl font-bold text-white mb-1">127 estudiantes</div>
+                      <div className="text-green-400 text-sm font-medium">+23 esta semana</div>
+                    </div>
+
+                    {/* Rating */}
+                    <div className="bg-slate-700/50 rounded-2xl p-6 border border-slate-600/30">
+                      <div className="flex items-center space-x-2 mb-2">
+                        <div className="flex space-x-1">
+                          {[...Array(5)].map((_, i) => (
+                            <span key={i} className="text-yellow-400 text-lg">⭐</span>
+                          ))}
+                        </div>
+                        <span className="text-white font-bold text-lg">4.9</span>
+                      </div>
+                      <p className="text-gray-400 text-sm">&quot;Increíble curso de IA práctica&quot;</p>
+                      <p className="text-gray-500 text-xs mt-1">- María González, Data Scientist</p>
+                    </div>
                   </div>
                 </div>
-                <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                  {course.description}
+              </div>
+            </div>
+          </div>
+
+          {/* Grid de categorías */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((category) => (
+              <div 
+                key={category.id} 
+                onClick={() => moveToCategory(category.id)}
+                className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-700/50 hover:border-purple-500/30 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer relative overflow-hidden"
+              >
+                {/* Indicador de categoría */}
+                <div className="absolute top-4 right-4">
+                  <div className="flex items-center space-x-1 text-xs text-gray-400">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Header de la categoría */}
+                <div className="flex items-start space-x-4 mb-4">
+                  <div className={`w-14 h-14 ${category.color} rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}>
+                    {category.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-white font-bold text-lg leading-tight group-hover:text-purple-300 transition-colors mb-1">
+                      {category.title}
+                    </h3>
+                    <div className="flex items-center space-x-3 text-xs">
+                      <span className="px-2 py-1 bg-slate-700/50 rounded-full text-green-400 font-medium">
+                        {category.courseCount} cursos
+                      </span>
+                      <span className="text-gray-500">
+                        {category.level}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Descripción */}
+                <p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3">
+                  {category.description}
                 </p>
-                <p className="text-gray-500 text-xs">
-                  {course.instructor}
-                </p>
+
+                {/* Footer con CTA */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2 text-xs text-gray-500">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                    <span>Categoría</span>
+                  </div>
+                  <div className="flex items-center space-x-1 text-purple-400 group-hover:text-purple-300 transition-colors text-sm font-medium">
+                    <span>Explorar</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
               </div>
             ))}
           </div>
@@ -247,15 +382,15 @@ const Home: NextPage = () => {
         {/* Stats section */}
         <div className="mt-20 text-center">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
               <div className="text-3xl font-bold text-green-400 mb-2">1000+</div>
               <div className="text-gray-300">Cursos disponibles</div>
             </div>
-            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
               <div className="text-3xl font-bold text-green-400 mb-2">50k+</div>
               <div className="text-gray-300">Estudiantes activos</div>
             </div>
-            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
               <div className="text-3xl font-bold text-green-400 mb-2">95%</div>
               <div className="text-gray-300">Tasa de satisfacción</div>
             </div>
