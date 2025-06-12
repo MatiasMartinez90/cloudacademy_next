@@ -13,6 +13,9 @@ const Home: NextPage = () => {
   const moveToCategory = (categoryId: number) => {
     // Redirigir a la página específica de cada categoría
     switch(categoryId) {
+      case 7: // Challenge para principiantes
+        Router.push('/challenge-principiantes')
+        break
       case 8: // DevOps
         Router.push('/devops')
         break
