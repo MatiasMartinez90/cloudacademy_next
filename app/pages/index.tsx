@@ -25,93 +25,93 @@ const Home: NextPage = () => {
   const categories = [
     {
       id: 1,
-      title: "IA & Machine Learning",
-      description: "Inteligencia Artificial, RAG, ChatGPT, Machine Learning y proyectos prácticos con las últimas tecnologías.",
+      title: "RAG Bedrock",
+      description: "Construye chatbots inteligentes con Amazon Bedrock y RAG. Integra IA generativa con AWS para crear asistentes que entienden tus datos empresariales.",
       icon: "🧠",
       color: "bg-purple-500",
-      courseCount: 12,
+      courseCount: 8,
       level: "Intermedio-Avanzado",
-      category: "IA & ML"
+      category: "IA & AWS"
     },
     {
       id: 2,
-      title: "AWS & Cloud",
-      description: "Amazon Web Services, certificaciones, arquitectura cloud y servicios de nube para empresas modernas.",
+      title: "AWS Cloud Practitioner",
+      description: "Fundamentos de AWS Cloud Computing. Prepárate para la certificación oficial y domina servicios core de Amazon Web Services desde cero.",
       icon: "☁️",
       color: "bg-orange-500",
-      courseCount: 18,
-      level: "Todos los niveles",
-      category: "AWS"
+      courseCount: 24,
+      level: "Principiante",
+      category: "AWS Certificación"
     },
     {
       id: 3,
-      title: "Ciberseguridad",
-      description: "Ethical hacking, pentesting, seguridad de aplicaciones y protección de infraestructuras empresariales.",
+      title: "Seguridad",
+      description: "AWS Security, IAM, WAF, CloudTrail y mejores prácticas de ciberseguridad en la nube. Protege tus workloads con herramientas nativas de AWS.",
       icon: "🔒",
       color: "bg-red-500",
-      courseCount: 15,
+      courseCount: 18,
       level: "Intermedio-Avanzado",
-      category: "Ciberseguridad"
+      category: "AWS Security"
     },
     {
       id: 4,
-      title: "Redes & Networking",
-      description: "Protocolos TCP/IP, configuración de routers, switches, VPN y administración de redes empresariales.",
+      title: "Networks",
+      description: "AWS VPC, Route 53, CloudFront, Load Balancers y arquitectura de redes en la nube. Diseña infraestructuras resilientes y escalables.",
       icon: "🌐",
       color: "bg-blue-500",
-      courseCount: 10,
-      level: "Básico-Intermedio",
-      category: "Networking"
+      courseCount: 16,
+      level: "Intermedio",
+      category: "AWS Networking"
     },
     {
       id: 5,
-      title: "Sistemas & Servidores",
-      description: "Administración de sistemas, Linux, Windows Server, virtualización y optimización de rendimiento.",
+      title: "Computo",
+      description: "EC2, Lambda, ECS, Fargate y servicios de compute de AWS. Optimiza cargas de trabajo y implementa arquitecturas serverless eficientes.",
       icon: "💻",
       color: "bg-gray-500",
-      courseCount: 14,
-      level: "Intermedio",
-      category: "Sistemas"
+      courseCount: 20,
+      level: "Básico-Avanzado",
+      category: "AWS Compute"
     },
     {
       id: 6,
-      title: "DevOps & CI/CD",
-      description: "Docker, Kubernetes, Jenkins, GitLab CI, automatización y metodologías de desarrollo ágil.",
+      title: "7 dias de devops challenges",
+      description: "Bootcamp intensivo de DevOps con AWS. CodePipeline, CodeBuild, CodeDeploy, Infrastructure as Code y automatización durante 7 días completos.",
       icon: "🚀",
       color: "bg-green-500",
-      courseCount: 22,
+      courseCount: 7,
       level: "Intermedio-Avanzado",
-      category: "DevOps"
+      category: "DevOps Intensivo"
     },
     {
       id: 7,
-      title: "Challenges & Proyectos",
-      description: "Desafíos prácticos, proyectos reales y bootcamps intensivos para aplicar conocimientos técnicos.",
-      icon: "🎯",
+      title: "Challenge para principiantes",
+      description: "Primeros pasos en AWS y DevOps. Proyectos guiados con S3, CloudFront, Route 53 y herramientas básicas para nuevos cloud engineers.",
+      icon: "🌱",
       color: "bg-yellow-500",
-      courseCount: 25,
-      level: "Todos los niveles",
-      category: "Proyectos"
+      courseCount: 12,
+      level: "Principiante",
+      category: "AWS Básico"
     },
     {
       id: 8,
-      title: "Automatización",
-      description: "Scripts, APIs, workflows automatizados y herramientas para optimizar procesos empresariales.",
+      title: "Devops",
+      description: "CI/CD con AWS DevOps, Terraform, Docker, Kubernetes en EKS, monitoring con CloudWatch y cultura DevOps en equipos ágiles.",
       icon: "⚙️",
       color: "bg-indigo-500",
-      courseCount: 16,
-      level: "Intermedio",
-      category: "Automatización"
+      courseCount: 28,
+      level: "Intermedio-Avanzado",
+      category: "DevOps Profesional"
     },
     {
       id: 9,
-      title: "Bases de Datos",
-      description: "SQL, NoSQL, MongoDB, PostgreSQL, optimización de consultas y arquitectura de datos escalable.",
+      title: "Databases",
+      description: "RDS, DynamoDB, Aurora, ElastiCache y estrategias de datos en AWS. Diseña arquitecturas de bases de datos escalables y de alta disponibilidad.",
       icon: "🗄️",
       color: "bg-teal-500",
-      courseCount: 13,
+      courseCount: 15,
       level: "Básico-Avanzado",
-      category: "Bases de Datos"
+      category: "AWS Databases"
     }
   ]
 
