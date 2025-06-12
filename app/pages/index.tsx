@@ -10,278 +10,258 @@ const Home: NextPage = () => {
     Router.push('/example')
   }
 
-  const courseSteps = [
-    {
-      id: 0,
-      title: "Before we start",
-      subtitle: "Step #1...",
-      icon: "🧠",
-      color: "from-purple-500 to-purple-600",
-      active: true
-    },
+  const courses = [
     {
       id: 1,
-      title: "Setting Up...",
+      title: "Full Stack Developer con JavaScript",
+      description: "Conviértete en Full Stack Developer con JavaScript. Domina JavaScript, Node y React para tu primer gran empleo.",
       icon: "⚡",
-      color: "from-blue-500 to-blue-600"
+      color: "bg-yellow-500",
+      instructor: "Por Juan Pérez",
+      category: "JavaScript"
     },
     {
       id: 2,
-      title: "Store Your Data",
-      icon: "🗄️",
-      color: "from-teal-500 to-teal-600"
+      title: "Curso de Configuración de Entorno de Desarrollo en Windows",
+      description: "Aprende a configurar tu entorno de desarrollo para trabajar de manera eficiente en Windows.",
+      icon: "🖥️",
+      color: "bg-blue-500",
+      instructor: "Por María García",
+      category: "Desarrollo"
     },
     {
       id: 3,
-      title: "Finish Setup",
-      icon: "🧠",
-      color: "from-pink-500 to-pink-600"
+      title: "Curso de Configuración de Entorno de Desarrollo en Linux",
+      description: "Domina Linux y configura tu entorno de desarrollo para ser más productivo.",
+      icon: "🐧",
+      color: "bg-orange-500",
+      instructor: "Por Carlos Ruiz",
+      category: "Linux"
     },
     {
       id: 4,
-      title: "Get Access",
-      icon: "🔑",
-      color: "from-yellow-500 to-yellow-600"
+      title: "Curso de Configuración de Entorno de Desarrollo en macOS",
+      description: "Optimiza tu flujo de trabajo en macOS y configura las mejores herramientas de desarrollo.",
+      icon: "🍎",
+      color: "bg-gray-500",
+      instructor: "Por Ana López",
+      category: "macOS"
     },
     {
       id: 5,
-      title: "Sync Your Data",
-      icon: "🔄",
-      color: "from-blue-500 to-blue-600"
+      title: "Curso de Git y GitHub",
+      description: "Aprende control de versiones y colaboración en proyectos con Git y GitHub.",
+      icon: "📦",
+      color: "bg-green-500",
+      instructor: "Por Luis Martín",
+      category: "Git"
     },
     {
       id: 6,
-      title: "Chat With Your Bot",
-      icon: "🤖",
-      color: "from-green-500 to-green-600"
+      title: "Curso de Frontend Developer",
+      description: "Desarrolla interfaces modernas y atractivas con HTML, CSS y JavaScript.",
+      icon: "🎨",
+      color: "bg-purple-500",
+      instructor: "Por Elena Vega",
+      category: "Frontend"
+    },
+    {
+      id: 7,
+      title: "Curso Práctico de Frontend Developer",
+      description: "Pon en práctica tus conocimientos de frontend con proyectos reales.",
+      icon: "💻",
+      color: "bg-indigo-500",
+      instructor: "Por Roberto Silva",
+      category: "Frontend"
+    },
+    {
+      id: 8,
+      title: "Curso de Fundamentos de JavaScript",
+      description: "Domina los conceptos fundamentales de JavaScript desde cero.",
+      icon: "📜",
+      color: "bg-yellow-600",
+      instructor: "Por Patricia Ruiz",
+      category: "JavaScript"
+    },
+    {
+      id: 9,
+      title: "Curso de Asincronismo con JavaScript",
+      description: "Aprende a manejar operaciones asíncronas en JavaScript de manera eficiente.",
+      icon: "⚡",
+      color: "bg-red-500",
+      instructor: "Por Diego Morales",
+      category: "JavaScript"
     }
   ]
 
   return (
-    <div className="min-h-screen bg-slate-900">
-      {/* Header */}
-      <header className="bg-slate-800/50 border-b border-slate-700/50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-900">
+      {/* Header estilo Platzi */}
+      <header className="bg-slate-800/90 backdrop-blur-sm border-b border-slate-700/50">
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-4">
             <div className="flex items-center space-x-8">
               <div className="flex-shrink-0">
-                <h2 className="text-xl font-bold text-white">WebCursos</h2>
+                <span className="text-2xl font-bold text-green-400">CloudAcademy</span>
+                <span className="ml-2 text-xs bg-red-500 text-white px-2 py-1 rounded uppercase font-bold">LIVE</span>
               </div>
-              <div className="hidden md:flex items-center space-x-6">
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Cursos</a>
-                <a href="#" className="text-gray-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Documentación</a>
+              
+              {/* Buscador central */}
+              <div className="hidden md:flex items-center flex-1 max-w-lg">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="¿Qué quieres aprender?"
+                    className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 transition-colors"
+                  />
+                  <svg className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
               </div>
             </div>
-            <div className="flex items-center space-x-3">
-              <button className="p-2 text-gray-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-              </button>
-              <button className="p-2 text-gray-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-              </button>
-              <button className="p-2 text-gray-400 hover:text-white transition-colors">
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
-                </svg>
+            
+            {/* Navegación derecha */}
+            <div className="flex items-center space-x-6">
+              <nav className="hidden md:flex items-center space-x-6">
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Cursos</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Empresas</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Blog</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Live</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Precios</a>
+              </nav>
+              <button 
+                onClick={moveToRequireAuthenticationPage}
+                className="bg-white text-slate-900 px-4 py-2 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+              >
+                Acceder
               </button>
             </div>
           </div>
         </nav>
       </header>
 
-      <div className="flex">
-        {/* Sidebar */}
-        <aside className="w-80 bg-slate-800/30 min-h-screen border-r border-slate-700/50 p-6">
-          <div className="space-y-3">
-            {courseSteps.map((step) => (
-              <div
-                key={step.id}
-                className={`flex items-center space-x-3 p-3 rounded-xl transition-all cursor-pointer ${
-                  step.active 
-                    ? 'bg-gradient-to-r from-purple-500/20 to-purple-600/20 border border-purple-500/30' 
-                    : 'hover:bg-slate-700/30'
-                }`}
+      {/* Hero Section estilo Platzi */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Cursos online para trabajar
+            <br />
+            <span className="text-green-400">en tecnología</span>
+          </h1>
+          <p className="text-xl text-gray-300 mb-12 max-w-4xl mx-auto">
+            Elige entre más de 1000 cursos online para aprender desde cero o desarrollar las 
+            habilidades más demandadas del trabajo en tecnología.
+          </p>
+
+          {/* Filtros estilo Platzi */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+            <select className="bg-slate-700/50 border border-slate-600 rounded-lg px-6 py-3 text-white focus:outline-none focus:border-green-400 transition-colors min-w-[200px]">
+              <option>Todas las categorías</option>
+              <option>Desarrollo Web</option>
+              <option>Inteligencia Artificial</option>
+              <option>DevOps</option>
+              <option>Diseño</option>
+            </select>
+            <select className="bg-slate-700/50 border border-slate-600 rounded-lg px-6 py-3 text-white focus:outline-none focus:border-green-400 transition-colors min-w-[200px]">
+              <option>Todas las escuelas</option>
+              <option>Escuela de JavaScript</option>
+              <option>Escuela de Python</option>
+              <option>Escuela de React</option>
+            </select>
+          </div>
+        </div>
+
+        {/* Botones principales destacados */}
+        <div className="flex flex-col sm:flex-row gap-6 justify-center mb-20">
+          <button 
+            onClick={moveToExamplePage}
+            className="group relative px-8 py-4 bg-gradient-to-r from-green-500 to-green-600 text-white rounded-xl font-semibold text-lg hover:from-green-600 hover:to-green-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-green-500/25"
+          >
+            <span className="relative z-10">🚀 Ver Cursos Disponibles</span>
+            <div className="absolute inset-0 bg-gradient-to-r from-green-400 to-green-500 rounded-xl blur opacity-30 group-hover:opacity-50 transition-opacity"></div>
+          </button>
+          <button 
+            onClick={moveToRequireAuthenticationPage}
+            className="px-8 py-4 border-2 border-green-400 text-green-400 rounded-xl font-semibold text-lg hover:bg-green-400 hover:text-slate-900 transition-all duration-300 transform hover:scale-105"
+          >
+            📊 Panel de Administración
+          </button>
+        </div>
+
+        {/* Sección de categoría */}
+        <div className="mb-8">
+          <div className="flex items-center justify-center mb-8">
+            <div className="flex items-center space-x-3">
+              <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              <h2 className="text-sm font-semibold text-gray-400 uppercase tracking-wider">DESARROLLO E INGENIERÍA</h2>
+            </div>
+          </div>
+
+          {/* Curso destacado principal */}
+          <div className="mb-12 bg-gradient-to-r from-slate-800/60 to-slate-700/60 backdrop-blur-sm border border-slate-600/50 rounded-2xl p-8">
+            <div className="flex items-center space-x-4 mb-6">
+              <div className="w-16 h-16 bg-gradient-to-r from-yellow-500 to-orange-500 rounded-2xl flex items-center justify-center text-2xl">
+                ⚡
+              </div>
+              <div>
+                <h3 className="text-2xl font-bold text-white mb-2">Full Stack Developer con JavaScript</h3>
+                <p className="text-gray-300 text-lg">
+                  Conviértete en Full Stack Developer con JavaScript. Domina JavaScript, Node y React para tu primer gran empleo. 
+                  Tu futuro en desarrollo web comienza aquí.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Grid de cursos estilo Platzi */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {courses.map((course) => (
+              <div 
+                key={course.id} 
+                className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6 hover:bg-slate-700/50 hover:border-slate-600 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer"
               >
-                <div className={`flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-to-r ${step.color} text-white text-sm`}>
-                  {step.icon}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <div className="text-sm text-gray-400">
-                    Step #{step.id}: {step.title}
+                <div className="flex items-center space-x-3 mb-4">
+                  <div className={`w-12 h-12 ${course.color} rounded-xl flex items-center justify-center text-xl`}>
+                    {course.icon}
                   </div>
-                  {step.subtitle && (
-                    <div className="text-xs text-gray-500 mt-1">
-                      {step.subtitle}
-                    </div>
-                  )}
+                  <div className="flex-1">
+                    <h4 className="text-white font-semibold text-sm leading-tight group-hover:text-green-400 transition-colors">
+                      {course.title}
+                    </h4>
+                  </div>
                 </div>
+                <p className="text-gray-400 text-sm mb-4 line-clamp-3">
+                  {course.description}
+                </p>
+                <p className="text-gray-500 text-xs">
+                  {course.instructor}
+                </p>
               </div>
             ))}
           </div>
-        </aside>
+        </div>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6 space-y-6">
-          {/* Featured Project Card */}
-          <div className="bg-slate-800/40 rounded-2xl border border-slate-700/50 p-8 backdrop-blur-sm">
-            <div className="flex items-start justify-between mb-6">
-              <div>
-                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-orange-500/20 text-orange-300 border border-orange-500/30">
-                  • PROJECT
-                </span>
-                <h1 className="text-3xl font-bold text-white mt-4">
-                  Set Up a RAG Chatbot in Bedrock
-                </h1>
-                <p className="text-gray-300 mt-3 text-lg">
-                  Build an AI chatbot that learns from your data with RAG and Amazon Bedrock!
-                </p>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="flex -space-x-2">
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-blue-400 to-blue-500 border-2 border-slate-800"></div>
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-green-400 to-green-500 border-2 border-slate-800"></div>
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-purple-400 to-purple-500 border-2 border-slate-800"></div>
-                  <div className="w-8 h-8 rounded-full bg-gradient-to-r from-pink-400 to-pink-500 border-2 border-slate-800"></div>
-                </div>
-                <span className="text-gray-400 text-sm ml-2">70+ completed</span>
-              </div>
+        {/* Stats section */}
+        <div className="mt-20 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+              <div className="text-3xl font-bold text-green-400 mb-2">1000+</div>
+              <div className="text-gray-300">Cursos disponibles</div>
             </div>
-
-            {/* Project Stats */}
-            <div className="grid grid-cols-4 gap-6 mb-8">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-orange-500/20">
-                  <svg className="w-4 h-4 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-400 uppercase tracking-wider">DIFFICULTY</div>
-                  <div className="text-sm text-white">Mildly spicy</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-blue-500/20">
-                  <svg className="w-4 h-4 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-400 uppercase tracking-wider">TIME</div>
-                  <div className="text-sm text-white">60 min</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-green-500/20">
-                  <svg className="w-4 h-4 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-400 uppercase tracking-wider">COST</div>
-                  <div className="text-sm text-white">~$0.01</div>
-                </div>
-              </div>
-
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-lg bg-purple-500/20">
-                  <svg className="w-4 h-4 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                </div>
-                <div>
-                  <div className="text-xs text-gray-400 uppercase tracking-wider">COMPLETED</div>
-                  <div className="text-sm text-white">70+ completed</div>
-                </div>
-              </div>
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+              <div className="text-3xl font-bold text-green-400 mb-2">50k+</div>
+              <div className="text-gray-300">Estudiantes activos</div>
             </div>
-
-            {/* Requirements and Concepts */}
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.78 0-2.678-2.153-1.415-3.414l5-5A2 2 0 009 9.172V5L8 4z" />
-                  </svg>
-                  <h3 className="text-white font-medium">WHAT YOU'LL NEED</h3>
-                </div>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex items-center space-x-2">
-                    <span className="w-1.5 h-1.5 bg-blue-400 rounded-full"></span>
-                    <span>An AWS account - <a href="#" className="text-blue-400 hover:text-blue-300 underline">Create one here!</a></span>
-                  </li>
-                </ul>
-              </div>
-
-              <div>
-                <div className="flex items-center space-x-2 mb-4">
-                  <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                  <h3 className="text-white font-medium">KEY CONCEPTS</h3>
-                </div>
-                <ul className="space-y-2 text-gray-300">
-                  <li className="flex items-center space-x-2">
-                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
-                    <span>Amazon Bedrock</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
-                    <span>Amazon OpenSearch Serverless</span>
-                  </li>
-                  <li className="flex items-center space-x-2">
-                    <span className="w-1.5 h-1.5 bg-green-400 rounded-full"></span>
-                    <span>Amazon S3</span>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            {/* Action Buttons */}
-            <div className="flex space-x-4 mt-8">
-              <button 
-                onClick={moveToExamplePage}
-                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg font-medium hover:from-blue-600 hover:to-blue-700 transition-all duration-200 transform hover:scale-105"
-              >
-                Comenzar Proyecto
-              </button>
-              <button 
-                onClick={moveToRequireAuthenticationPage}
-                className="px-6 py-3 bg-slate-700/50 text-gray-300 rounded-lg font-medium border border-slate-600 hover:bg-slate-700 transition-all duration-200"
-              >
-                Panel de Admin
-              </button>
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-xl p-6">
+              <div className="text-3xl font-bold text-green-400 mb-2">95%</div>
+              <div className="text-gray-300">Tasa de satisfacción</div>
             </div>
           </div>
-
-          {/* Summary Section */}
-          <div className="bg-slate-800/40 rounded-2xl border border-slate-700/50 p-6 backdrop-blur-sm">
-            <div className="flex items-center space-x-2 mb-4">
-              <svg className="w-5 h-5 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-              <h3 className="text-white font-semibold">30 Second Summary</h3>
-            </div>
-            <div className="space-y-4 text-gray-300">
-              <p>
-                In this project, you'll learn how to build a chatbot that's an expert on you – it can answer questions about 
-                who you are, what you do, and what you know!
-              </p>
-              <p>
-                This is made possible when we use a special AI technique called <span className="text-white font-medium">RAG (Retrieval Augmented 
-                Generation)</span>, which is a way to train an AI chatbot on your personal documents. We'll learn how to do this 
-                on <span className="text-white font-medium">Amazon Bedrock</span>, an AWS service that gives you access to AI models to bring into your applications.
-              </p>
-            </div>
-          </div>
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }
