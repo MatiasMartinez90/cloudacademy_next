@@ -1,8 +1,13 @@
 import { NextPage } from 'next'
+import Router from 'next/router'
 import useUser from '../lib/useUser'
 
 const Admin: NextPage = () => {
   const { user, loading, loggedOut, signOut } = useUser({ redirect: '/signin' })
+
+  const goToBedrockCourse = () => {
+    Router.push('/bedrock')
+  }
 
   if (loading) return (
     <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -19,6 +24,19 @@ const Admin: NextPage = () => {
 
   // Mock data para cursos
   const courses = [
+    {
+      id: 0,
+      title: "RAG Chatbot in Bedrock",
+      description: "Build an AI chatbot that learns from your data with RAG and Amazon Bedrock!",
+      instructor: "AWS Expert",
+      duration: "60 min",
+      level: "Intermedio",
+      image: "https://via.placeholder.com/300x200?text=AWS+Bedrock&color=FF6900",
+      progress: 0,
+      enrolled: true,
+      featured: true,
+      projectType: "hands-on"
+    },
     {
       id: 1,
       title: "React Fundamentals",
@@ -250,9 +268,21 @@ const Admin: NextPage = () => {
                 <img className="h-48 w-full object-cover" src={course.image} alt={course.title} />
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(course.level)}`}>
-                      {course.level}
-                    </span>
+                    <div className="flex items-center space-x-2">
+                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(course.level)}`}>
+                        {course.level}
+                      </span>
+                      {course.featured && (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
+                          ⭐ Destacado
+                        </span>
+                      )}
+                      {course.projectType && (
+                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
+                          🛠️ Hands-on
+                        </span>
+                      )}
+                    </div>
                     <span className="text-sm text-gray-500">{course.duration}</span>
                   </div>
                   <h3 className="text-lg font-medium text-gray-900 mb-2">{course.title}</h3>
@@ -272,9 +302,18 @@ const Admin: NextPage = () => {
                     </div>
                   </div>
 
-                  <button className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200">
-                    {course.progress === 100 ? 'Revisar' : course.progress > 0 ? 'Continuar' : 'Comenzar'}
-                  </button>
+                  {course.featured ? (
+                    <button 
+                      onClick={goToBedrockCourse}
+                      className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-md hover:from-orange-600 hover:to-red-700 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
+                    >
+                      <span>🚀 Comenzar Proyecto</span>
+                    </button>
+                  ) : (
+                    <button className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200">
+                      {course.progress === 100 ? 'Revisar' : course.progress > 0 ? 'Continuar' : 'Comenzar'}
+                    </button>
+                  )}
                 </div>
               </div>
             ))}
