@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 import { Authenticator } from '@aws-amplify/ui-react'
 
-const DatabasesCategory: NextPage = () => {
+const DatabasesCategoryContent = () => {
   const { user } = useAuthenticator()
   const [selectedLevel, setSelectedLevel] = useState('all')
   const [selectedType, setSelectedType] = useState('all')
@@ -122,10 +122,6 @@ const DatabasesCategory: NextPage = () => {
   })
 
   const featuredCourses = courses.filter(course => course.featured)
-
-  if (!user) {
-    return <Authenticator />
-  }
 
   return (
     <div className="min-h-screen bg-slate-900">
@@ -369,6 +365,14 @@ const DatabasesCategory: NextPage = () => {
         </div>
       </div>
     </div>
+  )
+}
+
+const DatabasesCategory: NextPage = () => {
+  return (
+    <Authenticator>
+      {({ signOut, user }) => <DatabasesCategoryContent />}
+    </Authenticator>
   )
 }
 
