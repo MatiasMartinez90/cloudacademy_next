@@ -11,6 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   Amplify.configure({
     Auth: {
+      region: 'us-east-1',
       userPoolId: env.cognitoUserPoolId,
       userPoolWebClientId: env.cognitoUserPoolWebClientId,
     },
