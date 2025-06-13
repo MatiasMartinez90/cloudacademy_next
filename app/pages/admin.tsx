@@ -9,341 +9,359 @@ const Admin: NextPage = () => {
     Router.push('/bedrock')
   }
 
+  const moveToCategory = (categoryId: number) => {
+    // Redirigir a la página específica de cada categoría
+    switch(categoryId) {
+      case 1: // RAG Bedrock
+        Router.push('/rag-bedrock')
+        break
+      case 3: // Seguridad
+        Router.push('/seguridad')
+        break
+      case 4: // Networks
+        Router.push('/networks')
+        break
+      case 5: // Computo
+        Router.push('/computo')
+        break
+      case 7: // AWS Cloud Practitioner
+        Router.push('/challenge-principiantes')
+        break
+      case 8: // DevOps
+        Router.push('/devops')
+        break
+      case 9: // Bases de Datos
+        Router.push('/databases')
+        break
+      default:
+        // Para otras categorías, mostrar mensaje de "próximamente"
+        alert('Esta categoría estará disponible próximamente')
+    }
+  }
+
   if (loading) return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-400"></div>
     </div>
   )
   if (loggedOut) return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-      <div className="text-gray-600">Redirecting...</div>
+    <div className="min-h-screen bg-slate-900 flex items-center justify-center">
+      <div className="text-gray-400">Redirecting...</div>
     </div>
   )
 
   console.log(user.signInUserSession?.idToken?.jwtToken)
 
-  // Mock data para cursos
-  const courses = [
-    {
-      id: 0,
-      title: "RAG Chatbot in Bedrock",
-      description: "Build an AI chatbot that learns from your data with RAG and Amazon Bedrock!",
-      instructor: "AWS Expert",
-      duration: "60 min",
-      level: "Intermedio",
-      image: "https://via.placeholder.com/300x200?text=AWS+Bedrock&color=FF6900",
-      progress: 0,
-      enrolled: true,
-      featured: true,
-      projectType: "hands-on"
-    },
+  // Categorías basadas en el home
+  const categories = [
     {
       id: 1,
-      title: "React Fundamentals",
-      description: "Aprende los conceptos básicos de React desde cero",
-      instructor: "Ana García",
-      duration: "8 horas",
-      level: "Principiante",
-      image: "https://via.placeholder.com/300x200?text=React",
-      progress: 75,
-      enrolled: true
-    },
-    {
-      id: 2,
-      title: "Node.js y Express",
-      description: "Desarrollo backend con Node.js y Express",
-      instructor: "Carlos Ruiz",
-      duration: "12 horas",
-      level: "Intermedio",
-      image: "https://via.placeholder.com/300x200?text=Node.js",
-      progress: 40,
-      enrolled: true
+      title: "RAG Bedrock",
+      description: "Construye chatbots inteligentes con Amazon Bedrock y RAG. Integra IA generativa con AWS para crear asistentes que entienden tus datos empresariales.",
+      icon: "🧠",
+      color: "bg-purple-500",
+      courseCount: 8,
+      level: "Intermedio-Avanzado",
+      category: "IA & AWS"
     },
     {
       id: 3,
-      title: "Python para Data Science",
-      description: "Análisis de datos con Python y Pandas",
-      instructor: "María López",
-      duration: "15 horas",
-      level: "Intermedio",
-      image: "https://via.placeholder.com/300x200?text=Python",
-      progress: 0,
-      enrolled: false
+      title: "Seguridad",
+      description: "AWS Security, IAM, WAF, CloudTrail y mejores prácticas de ciberseguridad en la nube. Protege tus workloads con herramientas nativas de AWS.",
+      icon: "🔒",
+      color: "bg-red-500",
+      courseCount: 18,
+      level: "Intermedio-Avanzado",
+      category: "AWS Security"
     },
     {
       id: 4,
-      title: "Vue.js Avanzado",
-      description: "Técnicas avanzadas y mejores prácticas en Vue.js",
-      instructor: "Luis Martín",
-      duration: "10 horas",
-      level: "Avanzado",
-      image: "https://via.placeholder.com/300x200?text=Vue.js",
-      progress: 90,
-      enrolled: true
+      title: "Networks",
+      description: "AWS VPC, Route 53, CloudFront, Load Balancers y arquitectura de redes en la nube. Diseña infraestructuras resilientes y escalables.",
+      icon: "🌐",
+      color: "bg-blue-500",
+      courseCount: 16,
+      level: "Intermedio",
+      category: "AWS Networking"
     },
     {
       id: 5,
-      title: "Machine Learning con TensorFlow",
-      description: "Introducción al aprendizaje automático",
-      instructor: "Elena Vega",
-      duration: "20 horas",
-      level: "Avanzado",
-      image: "https://via.placeholder.com/300x200?text=ML",
-      progress: 0,
-      enrolled: false
+      title: "Computo",
+      description: "EC2, Lambda, ECS, Fargate y servicios de compute de AWS. Optimiza cargas de trabajo y implementa arquitecturas serverless eficientes.",
+      icon: "💻",
+      color: "bg-gray-500",
+      courseCount: 20,
+      level: "Básico-Avanzado",
+      category: "AWS Compute"
     },
     {
       id: 6,
-      title: "CSS Grid y Flexbox",
-      description: "Layouts modernos con CSS Grid y Flexbox",
-      instructor: "Roberto Silva",
-      duration: "6 horas",
-      level: "Principiante",
-      image: "https://via.placeholder.com/300x200?text=CSS",
-      progress: 100,
-      enrolled: true
+      title: "7 dias de devops challenges",
+      description: "Bootcamp intensivo de DevOps con AWS. CodePipeline, CodeBuild, CodeDeploy, Infrastructure as Code y automatización durante 7 días completos.",
+      icon: "🚀",
+      color: "bg-green-500",
+      courseCount: 7,
+      level: "Intermedio-Avanzado",
+      category: "DevOps Intensivo"
     },
     {
       id: 7,
-      title: "Docker y Kubernetes",
-      description: "Containerización y orquestación de aplicaciones",
-      instructor: "Patricia Ruiz",
-      duration: "14 horas",
-      level: "Intermedio",
-      image: "https://via.placeholder.com/300x200?text=Docker",
-      progress: 25,
-      enrolled: true
+      title: "AWS Cloud Practitioner",
+      description: "Fundamentos de AWS Cloud Computing. Prepárate para la certificación oficial y domina servicios core de Amazon Web Services desde cero.",
+      icon: "☁️",
+      color: "bg-orange-500",
+      courseCount: 24,
+      level: "Principiante",
+      category: "AWS Certificación"
     },
     {
       id: 8,
-      title: "GraphQL API Design",
-      description: "Diseño de APIs modernas con GraphQL",
-      instructor: "Diego Morales",
-      duration: "9 horas",
-      level: "Intermedio",
-      image: "https://via.placeholder.com/300x200?text=GraphQL",
-      progress: 0,
-      enrolled: false
+      title: "Devops",
+      description: "CI/CD con AWS DevOps, Terraform, Docker, Kubernetes en EKS, monitoring con CloudWatch y cultura DevOps en equipos ágiles.",
+      icon: "⚙️",
+      color: "bg-indigo-500",
+      courseCount: 28,
+      level: "Intermedio-Avanzado",
+      category: "DevOps Profesional"
     },
     {
       id: 9,
-      title: "React Native Mobile",
-      description: "Desarrollo de apps móviles con React Native",
-      instructor: "Carmen Torres",
-      duration: "16 horas",
-      level: "Intermedio",
-      image: "https://via.placeholder.com/300x200?text=React+Native",
-      progress: 60,
-      enrolled: true
-    },
-    {
-      id: 10,
-      title: "AWS Cloud Fundamentals",
-      description: "Introducción a servicios de Amazon Web Services",
-      instructor: "Fernando Castro",
-      duration: "18 horas",
-      level: "Principiante",
-      image: "https://via.placeholder.com/300x200?text=AWS",
-      progress: 0,
-      enrolled: false
+      title: "Databases",
+      description: "RDS, DynamoDB, Aurora, ElastiCache y estrategias de datos en AWS. Diseña arquitecturas de bases de datos escalables y de alta disponibilidad.",
+      icon: "🗄️",
+      color: "bg-teal-500",
+      courseCount: 15,
+      level: "Básico-Avanzado",
+      category: "AWS Databases"
     }
   ]
 
-  const enrolledCourses = courses.filter(course => course.enrolled)
-  const availableCourses = courses.filter(course => !course.enrolled)
-
-  const getLevelColor = (level: string) => {
-    switch (level) {
-      case 'Principiante': return 'bg-green-100 text-green-800'
-      case 'Intermedio': return 'bg-yellow-100 text-yellow-800'
-      case 'Avanzado': return 'bg-red-100 text-red-800'
-      default: return 'bg-gray-100 text-gray-800'
-    }
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-6">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">CloudAcademy Dashboard</h1>
-              <p className="text-sm text-gray-600">Bienvenido, {user.attributes?.email}</p>
+    <div className="min-h-screen bg-slate-900">
+      {/* Header estilo Platzi */}
+      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50">
+        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-4">
+            <div className="flex items-center space-x-8">
+              <div className="flex-shrink-0">
+                <span className="text-2xl font-bold text-green-400">CloudAcademy</span>
+                <span className="ml-2 text-xs bg-red-500 text-white px-2 py-1 rounded uppercase font-bold">LIVE</span>
+              </div>
+              
+              {/* Buscador central */}
+              <div className="hidden md:flex items-center flex-1 max-w-lg">
+                <div className="relative w-full">
+                  <input
+                    type="text"
+                    placeholder="¿Qué quieres aprender?"
+                    className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 transition-colors"
+                  />
+                  <svg className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  </svg>
+                </div>
+              </div>
             </div>
-            <button 
-              onClick={() => signOut({ redirect: '/' })}
-              className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200"
-            >
-              Cerrar Sesión
-            </button>
+            
+            {/* Navegación derecha */}
+            <div className="flex items-center space-x-6">
+              <nav className="hidden md:flex items-center space-x-6">
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Cursos</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Empresas</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Blog</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Live</a>
+                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Precios</a>
+              </nav>
+              <div className="flex items-center space-x-4">
+                <span className="text-gray-300 text-sm">Hola, {user.attributes?.email}</span>
+                <button 
+                  onClick={() => signOut({ redirect: '/' })}
+                  className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors"
+                >
+                  Cerrar Sesión
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
+        </nav>
       </header>
 
-      <main className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">
+      {/* Hero Section estilo Platzi */}
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="text-center mb-12">
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
+            Dashboard de aprendizaje
+            <br />
+            <span className="text-green-400">CloudAcademy</span>
+          </h1>
+          <p className="text-xl text-gray-300 mb-16 max-w-4xl mx-auto">
+            Accede a todas tus categorías de cursos AWS y DevOps. Continúa tu aprendizaje desde donde lo dejaste.
+          </p>
+        </div>
+
         {/* Stats Overview */}
         <div className="mb-8">
           <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-400 truncate">Categorías Disponibles</dt>
+                    <dd className="text-lg font-medium text-white">{categories.length}</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-400 truncate">Cursos Totales</dt>
+                    <dd className="text-lg font-medium text-white">{categories.reduce((acc, cat) => acc + cat.courseCount, 0)}</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-400 truncate">Especialidades AWS</dt>
+                    <dd className="text-lg font-medium text-white">7</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="flex items-center">
+                <div className="flex-shrink-0">
+                  <svg className="h-6 w-6 text-orange-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <div className="ml-5 w-0 flex-1">
+                  <dl>
+                    <dt className="text-sm font-medium text-gray-400 truncate">Horas de Contenido</dt>
+                    <dd className="text-lg font-medium text-white">150+</dd>
+                  </dl>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Sección de categorías */}
+        <div className="mb-8">
+          <div className="flex flex-col items-center text-center mb-12">
+            <div className="flex items-center space-x-3 mb-4">
+              <svg className="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              <h2 className="text-2xl font-bold text-white">Explora por Categorías</h2>
+            </div>
+            <p className="text-gray-400 max-w-2xl">
+              Descubre cursos organizados por especialidad. Cada categoría contiene múltiples cursos diseñados para llevarte desde principiante hasta experto.
+            </p>
+          </div>
+
+          {/* Grid de categorías */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {categories.map((category) => (
+              <div 
+                key={category.id} 
+                onClick={() => moveToCategory(category.id)}
+                className="group bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6 hover:bg-slate-700/50 hover:border-purple-500/30 transition-all duration-300 hover:transform hover:scale-105 cursor-pointer relative overflow-hidden"
+              >
+                {/* Indicador de categoría */}
+                <div className="absolute top-4 right-4">
+                  <div className="flex items-center space-x-1 text-xs text-gray-400">
+                    <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                  </div>
+                </div>
+
+                {/* Header de la categoría */}
+                <div className="flex items-start space-x-4 mb-4">
+                  <div className={`w-14 h-14 ${category.color} rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform duration-300`}>
+                    {category.icon}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <h3 className="text-white font-bold text-lg leading-tight group-hover:text-purple-300 transition-colors mb-1">
+                      {category.title}
+                    </h3>
+                    <div className="flex items-center space-x-3 text-xs">
+                      <span className="px-2 py-1 bg-slate-700/50 rounded-full text-green-400 font-medium">
+                        {category.courseCount} cursos
+                      </span>
+                      <span className="text-gray-500">
+                        {category.level}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Descripción */}
+                <p className="text-gray-400 text-sm mb-4 leading-relaxed line-clamp-3">
+                  {category.description}
+                </p>
+
+                {/* Footer con CTA */}
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-2 text-xs text-gray-500">
+                    <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.746 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
+                    <span>Categoría</span>
                   </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">Cursos Inscritos</dt>
-                      <dd className="text-lg font-medium text-gray-900">{enrolledCourses.length}</dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  <div className="flex items-center space-x-1 text-purple-400 group-hover:text-purple-300 transition-colors text-sm font-medium">
+                    <span>Explorar</span>
+                    <svg className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                     </svg>
                   </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">Cursos Completados</dt>
-                      <dd className="text-lg font-medium text-gray-900">{enrolledCourses.filter(c => c.progress === 100).length}</dd>
-                    </dl>
-                  </div>
                 </div>
-              </div>
-            </div>
 
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">En Progreso</dt>
-                      <dd className="text-lg font-medium text-gray-900">{enrolledCourses.filter(c => c.progress > 0 && c.progress < 100).length}</dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-white overflow-hidden shadow rounded-lg">
-              <div className="p-5">
-                <div className="flex items-center">
-                  <div className="flex-shrink-0">
-                    <svg className="h-6 w-6 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  </div>
-                  <div className="ml-5 w-0 flex-1">
-                    <dl>
-                      <dt className="text-sm font-medium text-gray-500 truncate">Horas Totales</dt>
-                      <dd className="text-lg font-medium text-gray-900">{enrolledCourses.reduce((acc, course) => acc + parseInt(course.duration), 0)}h</dd>
-                    </dl>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Mis Cursos */}
-        <div className="mb-12">
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Mis Cursos</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {enrolledCourses.map((course) => (
-              <div key={course.id} className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow duration-200">
-                <img className="h-48 w-full object-cover" src={course.image} alt={course.title} />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center space-x-2">
-                      <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(course.level)}`}>
-                        {course.level}
-                      </span>
-                      {course.featured && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-orange-100 text-orange-800">
-                          ⭐ Destacado
-                        </span>
-                      )}
-                      {course.projectType && (
-                        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-purple-100 text-purple-800">
-                          🛠️ Hands-on
-                        </span>
-                      )}
-                    </div>
-                    <span className="text-sm text-gray-500">{course.duration}</span>
-                  </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">{course.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{course.description}</p>
-                  <p className="text-sm text-gray-500 mb-4">Instructor: {course.instructor}</p>
-                  
-                  <div className="mb-4">
-                    <div className="flex justify-between text-sm text-gray-600 mb-1">
-                      <span>Progreso</span>
-                      <span>{course.progress}%</span>
-                    </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2">
-                      <div 
-                        className="bg-indigo-600 h-2 rounded-full transition-all duration-300" 
-                        style={{ width: `${course.progress}%` }}
-                      ></div>
-                    </div>
-                  </div>
-
-                  {course.featured ? (
-                    <button 
-                      onClick={goToBedrockCourse}
-                      className="w-full bg-gradient-to-r from-orange-500 to-red-600 text-white px-4 py-2 rounded-md hover:from-orange-600 hover:to-red-700 transition-all duration-200 transform hover:scale-105 flex items-center justify-center space-x-2"
-                    >
-                      <span>🚀 Comenzar Proyecto</span>
-                    </button>
-                  ) : (
-                    <button className="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors duration-200">
-                      {course.progress === 100 ? 'Revisar' : course.progress > 0 ? 'Continuar' : 'Comenzar'}
-                    </button>
-                  )}
-                </div>
+                {/* Hover effect overlay */}
+                <div className="absolute inset-0 bg-gradient-to-br from-purple-500/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl"></div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Cursos Disponibles */}
-        <div>
-          <h2 className="text-xl font-semibold text-gray-900 mb-6">Cursos Disponibles</h2>
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {availableCourses.map((course) => (
-              <div key={course.id} className="bg-white overflow-hidden shadow rounded-lg hover:shadow-md transition-shadow duration-200">
-                <img className="h-48 w-full object-cover" src={course.image} alt={course.title} />
-                <div className="p-6">
-                  <div className="flex items-center justify-between mb-2">
-                    <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${getLevelColor(course.level)}`}>
-                      {course.level}
-                    </span>
-                    <span className="text-sm text-gray-500">{course.duration}</span>
-                  </div>
-                  <h3 className="text-lg font-medium text-gray-900 mb-2">{course.title}</h3>
-                  <p className="text-sm text-gray-600 mb-4">{course.description}</p>
-                  <p className="text-sm text-gray-500 mb-4">Instructor: {course.instructor}</p>
-                  
-                  <button className="w-full bg-white text-indigo-600 px-4 py-2 rounded-md border border-indigo-600 hover:bg-indigo-50 transition-colors duration-200">
-                    Inscribirse
-                  </button>
-                </div>
-              </div>
-            ))}
+        {/* Stats section */}
+        <div className="mt-20 text-center">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="text-3xl font-bold text-green-400 mb-2">1000+</div>
+              <div className="text-gray-300">Cursos disponibles</div>
+            </div>
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="text-3xl font-bold text-green-400 mb-2">50k+</div>
+              <div className="text-gray-300">Estudiantes activos</div>
+            </div>
+            <div className="bg-slate-800/40 backdrop-blur-sm border border-slate-700/50 rounded-2xl p-6">
+              <div className="text-3xl font-bold text-green-400 mb-2">95%</div>
+              <div className="text-gray-300">Tasa de satisfacción</div>
+            </div>
           </div>
         </div>
       </main>
