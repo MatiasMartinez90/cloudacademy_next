@@ -13,6 +13,9 @@ const Home: NextPage = () => {
   const moveToCategory = (categoryId: number) => {
     // Redirigir a la página específica de cada categoría
     switch(categoryId) {
+      case 1: // RAG Bedrock
+        Router.push('/rag-bedrock')
+        break
       case 3: // Seguridad
         Router.push('/seguridad')
         break
