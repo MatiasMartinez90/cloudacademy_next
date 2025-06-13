@@ -174,13 +174,12 @@ const Home: NextPage = () => {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         <div className="text-center mb-12">
           <h1 className="text-4xl md:text-6xl font-bold text-white mb-6 leading-tight">
-            Cursos online para trabajar
+            Proyectos REALES para aprender
             <br />
-            <span className="text-green-400">en tecnología</span>
+            <span className="text-green-400">Cloud y Devops</span>
           </h1>
           <p className="text-xl text-gray-300 mb-16 max-w-4xl mx-auto">
-            Elige entre más de 1000 cursos online para aprender desde cero o desarrollar las 
-            habilidades más demandadas del trabajo en tecnología.
+            Creemos que en la práctica es donde realmente se aprende. Por eso creamos esta serie de proyectos, para hacerlos guiado por una asistente virtual con IA.
           </p>
         </div>
 
