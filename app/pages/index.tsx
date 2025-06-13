@@ -179,7 +179,7 @@ const Home: NextPage = () => {
             <span className="text-green-400">Cloud y Devops</span>
           </h1>
           <p className="text-xl text-gray-300 mb-16 max-w-4xl mx-auto">
-            Creemos que en la práctica es donde realmente se aprende. Por eso creamos esta serie de proyectos, para hacerlos guiado por una asistente virtual con IA.
+            Creemos que en la práctica es donde realmente se aprende. Por eso creamos esta serie de proyectos, para que los hagas guiado por una asistente virtual con IA.
           </p>
         </div>
 
@@ -193,7 +193,7 @@ const Home: NextPage = () => {
               <h2 className="text-2xl font-bold text-white">Chequea las categorías</h2>
             </div>
             <p className="text-gray-400 max-w-2xl">
-              Vas a encontrar proyectos desde lo básico, a lo avanzado y a lo último que se está usando.
+              Vas a encontrar proyectos desde lo básico, a lo avanzado hasta lo último que que está sonando.
             </p>
           </div>
 
