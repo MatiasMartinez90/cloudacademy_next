@@ -52,16 +52,6 @@ const Home: NextPage = () => {
       category: "IA & AWS"
     },
     {
-      id: 2,
-      title: "AWS Cloud Practitioner",
-      description: "Fundamentos de AWS Cloud Computing. Prepárate para la certificación oficial y domina servicios core de Amazon Web Services desde cero.",
-      icon: "☁️",
-      color: "bg-orange-500",
-      courseCount: 24,
-      level: "Principiante",
-      category: "AWS Certificación"
-    },
-    {
       id: 3,
       title: "Seguridad",
       description: "AWS Security, IAM, WAF, CloudTrail y mejores prácticas de ciberseguridad en la nube. Protege tus workloads con herramientas nativas de AWS.",
@@ -103,13 +93,13 @@ const Home: NextPage = () => {
     },
     {
       id: 7,
-      title: "Challenge para principiantes",
-      description: "Primeros pasos en AWS y DevOps. Proyectos guiados con S3, CloudFront, Route 53 y herramientas básicas para nuevos cloud engineers.",
-      icon: "🌱",
-      color: "bg-yellow-500",
-      courseCount: 12,
+      title: "AWS Cloud Practitioner",
+      description: "Fundamentos de AWS Cloud Computing. Prepárate para la certificación oficial y domina servicios core de Amazon Web Services desde cero.",
+      icon: "☁️",
+      color: "bg-orange-500",
+      courseCount: 24,
       level: "Principiante",
-      category: "AWS Básico"
+      category: "AWS Certificación"
     },
     {
       id: 8,
