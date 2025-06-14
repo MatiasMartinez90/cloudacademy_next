@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 import { Authenticator } from '@aws-amplify/ui-react'
 import AuthenticatedHeader from '../components/AuthenticatedHeader'
+import BedrockChatInterface from '../components/BedrockChatInterface'
 
 const BedrockCourseContent = () => {
   const { user, signOut } = useAuthenticator()
@@ -647,6 +648,13 @@ const BedrockCourseContent = () => {
                   </div>
                 </div>
 
+                {/* AI Chat Assistant for Step 0 */}
+                <BedrockChatInterface 
+                  courseStep={0}
+                  courseContext="bedrock-rag-course-intro"
+                  className="mb-6"
+                />
+
                 {/* Continue Button */}
                 <div className="text-center">
                   <button 
@@ -742,6 +750,13 @@ const BedrockCourseContent = () => {
                       </div>
                     </div>
                   </div>
+
+                  {/* AI Chat Assistant */}
+                  <BedrockChatInterface 
+                    courseStep={currentTaskStep}
+                    courseContext="bedrock-rag-course"
+                    className="mt-6"
+                  />
 
                   {/* Navigation */}
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mt-6 space-y-4 sm:space-y-0">
