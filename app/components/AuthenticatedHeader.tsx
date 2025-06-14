@@ -7,8 +7,11 @@ interface AuthenticatedHeaderProps {
 
 export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHeaderProps) {
   // Debug: Log user attributes to see what's available
-  console.log('User object:', user)
-  console.log('User attributes:', user?.attributes)
+  console.log('🔍 User object:', user)
+  console.log('🔍 User attributes:', user?.attributes)
+  console.log('🔍 User.name:', user?.attributes?.name)
+  console.log('🔍 User.picture:', user?.attributes?.picture)
+  console.log('🔍 User.email:', user?.attributes?.email)
   
   return (
     <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50">
