@@ -22,6 +22,12 @@ provider "aws" {
   region = "us-east-1"
 }
 
+# Provider AWS para US-East-1 (requerido para certificados de CloudFront)
+provider "aws" {
+  alias  = "us_east_1"
+  region = "us-east-1"
+}
+
 provider "random" {}
 
 # Data source para obtener outputs del backend
@@ -130,6 +136,17 @@ resource "aws_cloudfront_origin_access_identity" "origin_access_identity" {
   comment = "Website Identity"
 }
 
+# ACM Certificate para proyectos.cloudacademy.ar
+resource "aws_acm_certificate" "website_cert" {
+  provider                  = aws.us_east_1  # Los certificados de CloudFront deben estar en us-east-1
+  domain_name               = var.domain_name
+  validation_method         = "DNS"
+  
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 # CloudFront Function para rewrite
 resource "aws_cloudfront_function" "rewrite_function" {
   name    = "RewriteFunction"
@@ -144,6 +161,7 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   is_ipv6_enabled     = true
   price_class         = "PriceClass_All"
   default_root_object = "index.html"
+  aliases             = [var.domain_name]
 
   origin {
     domain_name = aws_s3_bucket.website_bucket.bucket_regional_domain_name
@@ -191,8 +209,12 @@ resource "aws_cloudfront_distribution" "website_distribution" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate.website_cert.arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
+  
+  depends_on = [aws_acm_certificate.website_cert]
 }
 
 # Nota: El deployment de archivos se maneja con GitHub Actions
@@ -212,4 +234,20 @@ output "website_bucket_name" {
 output "cloudfront_distribution_id" {
   description = "CloudFront Distribution ID"
   value       = aws_cloudfront_distribution.website_distribution.id
+}
+
+output "certificate_arn" {
+  description = "ACM Certificate ARN"
+  value       = aws_acm_certificate.website_cert.arn
+}
+
+output "certificate_validation_records" {
+  description = "DNS validation records for the certificate"
+  value = {
+    for record in aws_acm_certificate.website_cert.domain_validation_options : record.domain_name => {
+      name   = record.resource_record_name
+      type   = record.resource_record_type
+      value  = record.resource_record_value
+    }
+  }
 }
