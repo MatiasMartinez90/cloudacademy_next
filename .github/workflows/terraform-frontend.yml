@@ -3,7 +3,7 @@ name: Terraform Frontend Apply
 on:
   push:
     branches:
-      - google-auth
+      - bedrock1
     paths:
       - 'terraform/frontend/**'
       - '.github/workflows/terraform-frontend.yml'

@@ -3,7 +3,7 @@ name: Deploy Lambda PostConfirmationFn
 on:
   push:
     branches:
-      - google-auth
+      - bedrock1
     paths:
       - 'lambda/postConfirmation.zip'
       - '.github/workflows/deploy-lambda.yml'
