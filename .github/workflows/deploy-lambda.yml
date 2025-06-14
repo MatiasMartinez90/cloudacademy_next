@@ -3,7 +3,7 @@ name: Deploy Lambda PostConfirmationFn
 on:
   push:
     branches:
-      - ft/auth2
+      - google-auth
     paths:
       - 'lambda/postConfirmation.zip'
       - '.github/workflows/deploy-lambda.yml'

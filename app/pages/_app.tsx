@@ -14,6 +14,16 @@ function MyApp({ Component, pageProps }: AppProps) {
       region: 'us-east-1',
       userPoolId: env.cognitoUserPoolId,
       userPoolWebClientId: env.cognitoUserPoolWebClientId,
+      oauth: {
+        domain: env.cognitoDomain,
+        scope: ['email', 'openid', 'profile'],
+        redirectSignIn: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000',
+        redirectSignOut: typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000',
+        responseType: 'code',
+        options: {
+          AdvancedSecurityDataCollectionFlag: false,
+        },
+      },
     },
   })
 

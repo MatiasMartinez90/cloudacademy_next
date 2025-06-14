@@ -37,6 +37,7 @@ const AuthUI: NextPage = () => {
   return (
     <main className={styles.main}>
       <Authenticator
+        socialProviders={['google']}
         loginMechanisms={['email']}
         components={{
           SignUp: {

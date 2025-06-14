@@ -2,11 +2,11 @@ name: Build and Deploy to S3
 on:
   push:
     branches:
-      - tail3
+      - google-auth
     paths:
       - 'app/**'
       - 'cloudfrontfunction/**'
-      - '.github/workflows/deploy.yml'
+      - '.github/workflows/deploy-nextjs.yml'
 
 jobs:
   build-and-deploy:
@@ -35,7 +35,8 @@ jobs:
         run: |
           echo '{
             "cognitoUserPoolId": "us-east-1_kbBZ0w9sf",
-            "cognitoUserPoolWebClientId": "7ho22jco9j63c3hmsrsp4bj0ti"
+            "cognitoUserPoolWebClientId": "7ho22jco9j63c3hmsrsp4bj0ti",
+            "cognitoDomain": "cloudacademy-auth-xxxxxxxx.auth.us-east-1.amazoncognito.com"
           }' > ./app/out/env.json
           
       - name: Configure AWS credentials

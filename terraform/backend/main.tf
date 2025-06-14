@@ -113,20 +113,70 @@ resource "aws_lambda_permission" "cognito_invoke_lambda" {
   source_arn    = aws_cognito_user_pool.user_pool.arn
 }
 
-# Cognito User Pool Client - Configuración equivalente al CDK
+# Google Identity Provider para Cognito
+resource "aws_cognito_identity_provider" "google" {
+  user_pool_id  = aws_cognito_user_pool.user_pool.id
+  provider_name = "Google"
+  provider_type = "Google"
+
+  provider_details = {
+    client_id        = var.google_client_id
+    client_secret    = var.google_client_secret
+    authorize_scopes = "email openid profile"
+  }
+
+  attribute_mapping = {
+    email    = "email"
+    username = "sub"
+    name     = "name"
+  }
+}
+
+# Cognito User Pool Domain para OAuth
+resource "aws_cognito_user_pool_domain" "user_pool_domain" {
+  domain       = "cloudacademy-auth-${random_string.domain_suffix.result}"
+  user_pool_id = aws_cognito_user_pool.user_pool.id
+}
+
+# Random string para hacer único el dominio
+resource "random_string" "domain_suffix" {
+  length  = 8
+  special = false
+  upper   = false
+}
+
+# Cognito User Pool Client - Configuración para OAuth con Google
 resource "aws_cognito_user_pool_client" "user_pool_client" {
   name         = "UserPoolClient"
   user_pool_id = aws_cognito_user_pool.user_pool.id
 
-  # Equivalent to authFlows: { userPassword: true, userSrp: true } in CDK
+  # OAuth flows para Google authentication
   explicit_auth_flows = [
-    "ALLOW_USER_PASSWORD_AUTH",
     "ALLOW_USER_SRP_AUTH",
-    "ALLOW_REFRESH_TOKEN_AUTH"  # This is needed for refresh tokens to work
+    "ALLOW_REFRESH_TOKEN_AUTH"
   ]
 
+  # OAuth configuration
+  allowed_oauth_flows_user_pool_client = true
+  allowed_oauth_flows                 = ["code"]
+  allowed_oauth_scopes               = ["email", "openid", "profile"]
+  
+  # Callback URLs para la aplicación
+  callback_urls = [
+    "https://${aws_cognito_user_pool_domain.user_pool_domain.domain}.auth.us-east-1.amazoncognito.com/oauth2/idpresponse",
+    "http://localhost:3000",  # Para desarrollo local
+    var.production_callback_url  # URL de producción
+  ]
+  
+  logout_urls = [
+    "http://localhost:3000",
+    var.production_logout_url
+  ]
+
+  # Supported identity providers
+  supported_identity_providers = ["Google"]
+
   # Token validity - equivalent to CDK Duration.days()
-  # Note: Values are in hours by default in Terraform AWS provider
   access_token_validity  = 24   # 24 hours = 1 day
   id_token_validity     = 24   # 24 hours = 1 day  
   refresh_token_validity = 720  # 720 hours = 30 days
@@ -134,8 +184,10 @@ resource "aws_cognito_user_pool_client" "user_pool_client" {
   # Prevent user existence errors
   prevent_user_existence_errors = "ENABLED"
 
-  # Enable SRP authentication
+  # No client secret for public client
   generate_secret = false
+
+  depends_on = [aws_cognito_identity_provider.google]
 }
 
 # Outputs - equivalente a CfnOutput en CDK
@@ -147,4 +199,14 @@ output "cognito_user_pool_id" {
 output "cognito_user_pool_web_client_id" {
   description = "Cognito User Pool Web Client ID"
   value       = aws_cognito_user_pool_client.user_pool_client.id
+}
+
+output "cognito_user_pool_domain" {
+  description = "Cognito User Pool Domain for OAuth"
+  value       = aws_cognito_user_pool_domain.user_pool_domain.domain
+}
+
+output "google_identity_provider_name" {
+  description = "Google Identity Provider Name"
+  value       = aws_cognito_identity_provider.google.provider_name
 }

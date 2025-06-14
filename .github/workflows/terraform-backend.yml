@@ -3,10 +3,10 @@ name: Terraform Backend Apply
 on:
   push:
     branches:
-      - ft/auth2
+      - google-auth
     paths:
       - 'terraform/backend/**'
-      - '.github/workflows/terraform.yml'
+      - '.github/workflows/terraform-backend.yml'
 
 jobs:
   terraform-backend-apply:
@@ -34,4 +34,9 @@ jobs:
 
       - name: Terraform Apply
         working-directory: terraform/backend
+        env:
+          TF_VAR_google_client_id: ${{ secrets.GOOGLE_CLIENT_ID }}
+          TF_VAR_google_client_secret: ${{ secrets.GOOGLE_CLIENT_SECRET }}
+          TF_VAR_production_callback_url: "https://proyectos.cloudacademy.ar"
+          TF_VAR_production_logout_url: "https://proyectos.cloudacademy.ar"
         run: terraform apply -auto-approve 

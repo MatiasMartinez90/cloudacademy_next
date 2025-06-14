@@ -3,7 +3,7 @@ name: Terraform Frontend Apply
 on:
   push:
     branches:
-      - ft/auth2
+      - google-auth
     paths:
       - 'terraform/frontend/**'
       - '.github/workflows/terraform-frontend.yml'

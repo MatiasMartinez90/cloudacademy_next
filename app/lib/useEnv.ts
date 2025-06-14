@@ -5,6 +5,7 @@ const dev = process.env.NODE_ENV === 'development'
 interface Env {
   cognitoUserPoolId: string
   cognitoUserPoolWebClientId: string
+  cognitoDomain: string
 }
 
 const fetcher = async () => {
@@ -23,6 +24,7 @@ export default function useEnv() {
       env: Object.freeze({
         cognitoUserPoolId: process.env.NEXT_PUBLIC_AUTH_USER_POOL_ID,
         cognitoUserPoolWebClientId: process.env.NEXT_PUBLIC_AUTH_WEB_CLIENT_ID,
+        cognitoDomain: process.env.NEXT_PUBLIC_COGNITO_DOMAIN,
       }) as Env,
     }
   }
