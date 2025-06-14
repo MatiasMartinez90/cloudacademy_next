@@ -2,7 +2,7 @@ import { Auth } from 'aws-amplify'
 
 interface AuthenticatedHeaderProps {
   user: any
-  signOut: (options?: { redirect?: string }) => void
+  signOut: ((options: { redirect?: string }) => Promise<void>) | ((data?: any) => void)
 }
 
 export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHeaderProps) {
@@ -71,7 +71,16 @@ export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHead
               </div>
               
               <button 
-                onClick={() => signOut({ redirect: '/' })}
+                onClick={() => {
+                  // Handle both signOut types (useUser vs useAuthenticator)
+                  if (signOut.length > 0) {
+                    // useUser signOut - expects parameters
+                    (signOut as (options: { redirect?: string }) => Promise<void>)({ redirect: '/' })
+                  } else {
+                    // useAuthenticator signOut - no parameters
+                    (signOut as () => void)()
+                  }
+                }}
                 className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors"
               >
                 Cerrar Sesión
