@@ -6,12 +6,26 @@ interface AuthenticatedHeaderProps {
 }
 
 export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHeaderProps) {
-  // Debug: Log user attributes to see what's available
-  console.log('🔍 User object:', user)
-  console.log('🔍 User attributes:', user?.attributes)
-  console.log('🔍 User.name:', user?.attributes?.name)
-  console.log('🔍 User.picture:', user?.attributes?.picture)
-  console.log('🔍 User.email:', user?.attributes?.email)
+  // Extract user attributes from JWT token
+  const getTokenPayload = () => {
+    try {
+      if (user?.signInUserSession?.idToken?.payload) {
+        return user.signInUserSession.idToken.payload
+      }
+      return null
+    } catch (error) {
+      console.error('Error extracting token payload:', error)
+      return null
+    }
+  }
+
+  const tokenPayload = getTokenPayload()
+  
+  // Debug: Log what we found
+  console.log('🔍 Token payload:', tokenPayload)
+  console.log('🔍 Name:', tokenPayload?.name)
+  console.log('🔍 Picture:', tokenPayload?.picture)
+  console.log('🔍 Email:', tokenPayload?.email)
   
   return (
     <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50">
@@ -53,15 +67,15 @@ export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHead
               <div className="flex items-center space-x-3">
                 {/* User Avatar */}
                 <div className="w-10 h-10 rounded-full overflow-hidden border-2 border-green-400/50 hover:border-green-400 transition-colors">
-                  {user.attributes?.picture ? (
+                  {tokenPayload?.picture ? (
                     <img 
-                      src={user.attributes.picture} 
+                      src={tokenPayload.picture} 
                       alt="Profile"
                       className="w-full h-full object-cover"
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-green-500 to-green-600 flex items-center justify-center text-white font-bold text-lg">
-                      {user.attributes?.name?.charAt(0)?.toUpperCase() || user.attributes?.email?.charAt(0)?.toUpperCase()}
+                      {tokenPayload?.name?.charAt(0)?.toUpperCase() || tokenPayload?.email?.charAt(0)?.toUpperCase()}
                     </div>
                   )}
                 </div>
@@ -69,10 +83,10 @@ export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHead
                 {/* User Info */}
                 <div className="hidden sm:block">
                   <div className="text-white text-sm font-medium">
-                    Hola, {user.attributes?.name || user.attributes?.given_name || user.attributes?.email?.split('@')[0]}
+                    Hola, {tokenPayload?.name || tokenPayload?.given_name || tokenPayload?.email?.split('@')[0]}
                   </div>
                   <div className="text-gray-400 text-xs">
-                    {user.attributes?.email}
+                    {tokenPayload?.email}
                   </div>
                 </div>
               </div>
