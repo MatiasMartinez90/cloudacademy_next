@@ -102,6 +102,34 @@ resource "aws_cognito_user_pool" "user_pool" {
       max_length = 256
     }
   }
+
+  # Picture attribute for Google profile photos
+  schema {
+    attribute_data_type      = "String"
+    developer_only_attribute = false
+    mutable                  = true
+    name                     = "picture"
+    required                 = false
+
+    string_attribute_constraints {
+      min_length = 0
+      max_length = 2048  # URL length
+    }
+  }
+
+  # Name attribute for Google full name
+  schema {
+    attribute_data_type      = "String"
+    developer_only_attribute = false
+    mutable                  = true
+    name                     = "name"
+    required                 = false
+
+    string_attribute_constraints {
+      min_length = 0
+      max_length = 256
+    }
+  }
 }
 
 # Permiso para que Cognito invoque la función Lambda
@@ -129,6 +157,7 @@ resource "aws_cognito_identity_provider" "google" {
     email    = "email"
     username = "sub"
     name     = "name"
+    picture  = "picture"
   }
 }
 

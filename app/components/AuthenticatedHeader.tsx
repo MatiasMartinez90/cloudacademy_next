@@ -6,6 +6,10 @@ interface AuthenticatedHeaderProps {
 }
 
 export default function AuthenticatedHeader({ user, signOut }: AuthenticatedHeaderProps) {
+  // Debug: Log user attributes to see what's available
+  console.log('User object:', user)
+  console.log('User attributes:', user?.attributes)
+  
   return (
     <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50">
       <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
