@@ -1,0 +1,39 @@
+# ServiceMonitor for Prometheus monitoring (opcional)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: fastapi-bedrock-metrics
+  namespace: cloudacademy
+  labels:
+    app: fastapi-bedrock
+    release: prometheus
+spec:
+  selector:
+    matchLabels:
+      app: fastapi-bedrock
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 30s
+    scrapeTimeout: 10s
+  namespaceSelector:
+    matchNames:
+    - cloudacademy
+
+---
+# PodMonitor alternativo si prefieres monitorear pods directamente
+apiVersion: monitoring.coreos.com/v1
+kind: PodMonitor
+metadata:
+  name: fastapi-bedrock-pod-metrics
+  namespace: cloudacademy
+  labels:
+    app: fastapi-bedrock
+spec:
+  selector:
+    matchLabels:
+      app: fastapi-bedrock
+  podMetricsEndpoints:
+  - port: http
+    path: /metrics
+    interval: 30s

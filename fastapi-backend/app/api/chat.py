@@ -111,14 +111,4 @@ async def get_course_info(course_id: str):
     
     return course_info.get(course_id, {"name": course_id, "description": "Curso disponible"})
 
-# Error handlers
-@router.exception_handler(HTTPException)
-async def http_exception_handler(request, exc: HTTPException):
-    """
-    Custom HTTP exception handler
-    """
-    return ErrorResponse(
-        error=exc.detail,
-        detail=f"HTTP {exc.status_code}",
-        timestamp=datetime.utcnow()
-    )
+# Error handlers moved to main.py
