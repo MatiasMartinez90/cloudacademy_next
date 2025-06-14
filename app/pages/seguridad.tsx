@@ -3,9 +3,10 @@ import Router from 'next/router'
 import { useState } from 'react'
 import { useAuthenticator } from '@aws-amplify/ui-react'
 import { Authenticator } from '@aws-amplify/ui-react'
+import AuthenticatedHeader from '../components/AuthenticatedHeader'
 
 const SeguridadCategoryContent = () => {
-  const { user } = useAuthenticator()
+  const { user, signOut } = useAuthenticator()
   const [selectedLevel, setSelectedLevel] = useState('all')
   const [selectedType, setSelectedType] = useState('all')
 
@@ -95,27 +96,7 @@ const SeguridadCategoryContent = () => {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      {/* Header */}
-      <header className="bg-slate-800/50 border-b border-slate-700/50 p-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <button 
-                onClick={goBack}
-                className="flex items-center space-x-2 text-gray-400 hover:text-white transition-colors"
-              >
-                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                </svg>
-                <span>Volver al Dashboard</span>
-              </button>
-            </div>
-            <div className="text-center text-white font-medium">
-              Categoría: Seguridad
-            </div>
-          </div>
-        </div>
-      </header>
+      <AuthenticatedHeader user={user} signOut={signOut} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Hero Section */}

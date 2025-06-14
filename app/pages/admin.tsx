@@ -1,6 +1,7 @@
 import { NextPage } from 'next'
 import Router from 'next/router'
 import useUser from '../lib/useUser'
+import AuthenticatedHeader from '../components/AuthenticatedHeader'
 
 const Admin: NextPage = () => {
   const { user, loading, loggedOut, signOut } = useUser({ redirect: '/signin' })
@@ -138,53 +139,7 @@ const Admin: NextPage = () => {
 
   return (
     <div className="min-h-screen bg-slate-900">
-      {/* Header estilo Platzi */}
-      <header className="bg-slate-800/50 backdrop-blur-sm border-b border-slate-700/50">
-        <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center py-4">
-            <div className="flex items-center space-x-8">
-              <div className="flex-shrink-0">
-                <span className="text-2xl font-bold text-green-400">CloudAcademy</span>
-                <span className="ml-2 text-xs bg-red-500 text-white px-2 py-1 rounded uppercase font-bold">LIVE</span>
-              </div>
-              
-              {/* Buscador central */}
-              <div className="hidden md:flex items-center flex-1 max-w-lg">
-                <div className="relative w-full">
-                  <input
-                    type="text"
-                    placeholder="¿Qué quieres aprender?"
-                    className="w-full bg-slate-700/50 border border-slate-600 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:border-green-400 transition-colors"
-                  />
-                  <svg className="absolute right-3 top-2.5 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            
-            {/* Navegación derecha */}
-            <div className="flex items-center space-x-6">
-              <nav className="hidden md:flex items-center space-x-6">
-                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Cursos</a>
-                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Empresas</a>
-                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Blog</a>
-                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Live</a>
-                <a href="#" className="text-gray-300 hover:text-white text-sm font-medium transition-colors">Precios</a>
-              </nav>
-              <div className="flex items-center space-x-4">
-                <span className="text-gray-300 text-sm">Hola, {user.attributes?.email}</span>
-                <button 
-                  onClick={() => signOut({ redirect: '/' })}
-                  className="bg-red-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-red-600 transition-colors"
-                >
-                  Cerrar Sesión
-                </button>
-              </div>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <AuthenticatedHeader user={user} signOut={signOut} />
 
       {/* Hero Section estilo Platzi */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
