@@ -36,7 +36,7 @@ jobs:
           echo '{
             "cognitoUserPoolId": "us-east-1_kbBZ0w9sf",
             "cognitoUserPoolWebClientId": "7ho22jco9j63c3hmsrsp4bj0ti",
-            "cognitoDomain": "cloudacademy-auth-xxxxxxxx.auth.us-east-1.amazoncognito.com"
+            "cognitoDomain": "cloudacademy-auth-yoq6skaz.auth.us-east-1.amazoncognito.com"
           }' > ./app/out/env.json
           
       - name: Configure AWS credentials
