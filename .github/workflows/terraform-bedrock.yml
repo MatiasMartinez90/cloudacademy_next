@@ -1,0 +1,73 @@
+name: Terraform Bedrock Apply
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'terraform-bedrock/**'
+      - '.github/workflows/terraform-bedrock.yml'
+  workflow_dispatch:
+
+jobs:
+  terraform-bedrock-apply:
+    runs-on: ubuntu-latest
+    environment: prod
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: 1.5.7
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
+
+      - name: Terraform Init
+        working-directory: terraform-bedrock
+        run: terraform init
+
+      - name: Terraform Plan
+        working-directory: terraform-bedrock
+        run: terraform plan -out=tfplan
+
+      - name: Terraform Apply
+        working-directory: terraform-bedrock
+        run: terraform apply -auto-approve tfplan
+
+      - name: Output Bedrock Credentials
+        working-directory: terraform-bedrock
+        run: |
+          echo "::add-mask::$(terraform output -raw access_key_id)"
+          echo "::add-mask::$(terraform output -raw secret_access_key)"
+          echo "## Terraform Bedrock Deployment Results" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **IAM User Created**: $(terraform output -raw iam_user_name)" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **IAM Role ARN**: $(terraform output -raw iam_role_arn)" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **Bedrock Policy**: $(terraform output -raw bedrock_policy_arn)" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **SSM Parameters**: Credentials stored in AWS Parameter Store" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### Next Steps:" >> $GITHUB_STEP_SUMMARY
+          echo "1. Update Kubernetes secret with new credentials" >> $GITHUB_STEP_SUMMARY
+          echo "2. Enable Bedrock models in AWS Console if needed" >> $GITHUB_STEP_SUMMARY
+          echo "3. Test FastAPI connection to Bedrock" >> $GITHUB_STEP_SUMMARY
+
+      - name: Store Outputs as GitHub Secrets (Optional)
+        working-directory: terraform-bedrock
+        run: |
+          echo "ACCESS_KEY_ID=$(terraform output -raw access_key_id)" >> bedrock_credentials.txt
+          echo "SECRET_ACCESS_KEY=$(terraform output -raw secret_access_key)" >> bedrock_credentials.txt
+          echo "IAM_USER_ARN=$(terraform output -raw iam_user_arn)" >> bedrock_credentials.txt
+          echo "📋 Credentials saved to bedrock_credentials.txt (not committed)" >> $GITHUB_STEP_SUMMARY
+
+      - name: Upload Terraform Plan (for review)
+        uses: actions/upload-artifact@v4
+        with:
+          name: terraform-bedrock-plan
+          path: terraform-bedrock/tfplan
+          retention-days: 30
