@@ -22,7 +22,7 @@ data:
   
   # AWS Bedrock Settings
   BEDROCK_REGION: "us-east-1"
-  BEDROCK_MODEL_ID: "anthropic.claude-3-sonnet-20240229-v1:0"
+  BEDROCK_MODEL_ID: "anthropic.claude-3-haiku-20240307-v1:0"
   
   # Supported Courses
   SUPPORTED_COURSES: '["bedrock-rag","seguridad","networks","databases","devops"]'

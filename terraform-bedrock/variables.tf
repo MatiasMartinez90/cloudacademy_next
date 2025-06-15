@@ -14,8 +14,8 @@ variable "bedrock_models" {
   description = "List of Bedrock models to allow access to"
   type        = list(string)
   default = [
-    "anthropic.claude-3-sonnet-20240229-v1:0",
     "anthropic.claude-3-haiku-20240307-v1:0",
+    "anthropic.claude-3-sonnet-20240229-v1:0",
     "anthropic.claude-instant-v1",
     "anthropic.claude-v2"
   ]
